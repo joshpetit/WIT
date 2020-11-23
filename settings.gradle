@@ -1,0 +1,3 @@
+rootProject.name = 'wit'
+include 'wit-core'
+include 'wit-gui'
