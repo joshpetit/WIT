@@ -27,6 +27,8 @@ gradle-app.setting
 # Session
 Session.vim
 Sessionx.vim
+gui.vim
+core.vim
 
 # Temporary
 .netrwhist
