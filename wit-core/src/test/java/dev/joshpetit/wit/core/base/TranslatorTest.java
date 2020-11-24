@@ -10,8 +10,8 @@ class MainTest {
 	@BeforeAll
 	public static void setup() {
 		Properties config = new Properties();
-		config.setProperty("00", "0system_payload");
 		config.setProperty("01", "1aA");
+		config.setProperty("00", "00"); // System Message, CAPSLOCK
 		config.setProperty("10", "2no_payload");
 		Translator.setConfig(config);
 	}
@@ -26,5 +26,10 @@ class MainTest {
 		AppendCommand ac = (AppendCommand) com;
 		assertEquals(ac.getLower(), "a");
 		assertEquals(ac.getUpper(), "A");
+
+		com = Translator.translate(0, 0);
+		assertTrue(com instanceof SystemCommand, "Command should be of type SystemCommand");
+		SystemCommand sc = (SystemCommand) com;
+		assertEquals(sc.getCommand(), Command.SYSTEM.CAPS_LOCK);
 	}
 }
