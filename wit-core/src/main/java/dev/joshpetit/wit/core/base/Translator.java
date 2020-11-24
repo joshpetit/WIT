@@ -18,12 +18,12 @@ public class Translator {
 		} else {
 			String command = config.getProperty(key);
 			int type = command.charAt(0) - 48;
-			if (type == Command.SYSTEM) {
-				return new Command(Command.SYSTEM, command.substring(1));
-			} else if (type == Command.APPEND) {
-				return new Command(Command.APPEND, command.substring(1));
-			} else if (type == Command.DELETE) {
-				return new Command(Command.DELETE);
+			if (type == Command.TYPE.SYSTEM) {
+				return new Command(Command.TYPE.SYSTEM, command.substring(1));
+			} else if (type == Command.TYPE.APPEND) {
+				return new Command(Command.TYPE.APPEND, command.substring(1));
+			} else if (type == Command.TYPE.DELETE) {
+				return new Command(Command.TYPE.DELETE);
 			} else {
 				throw new IllegalArgumentException("Invalid Command Type");
 			}

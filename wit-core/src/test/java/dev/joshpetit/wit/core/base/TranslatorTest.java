@@ -20,19 +20,19 @@ class MainTest {
 	void testTranslation() {
 		Command com = Translator.translate(0, 0);
 		assertEquals(com.getType(),
-				Command.SYSTEM, "inputted translation should be system command");
+				Command.TYPE.SYSTEM, "inputted translation should be system command");
 		assertEquals(com.getPayload(),
 				"system_payload", "System payload message should be command payload");
 
 		com = Translator.translate(0, 1);
 		assertEquals(com.getType(),
-				Command.APPEND, "Inputted translation should be append");
+				Command.TYPE.APPEND, "Inputted translation should be append");
 		assertEquals(com.getPayload(),
 				"append_payload", "Payload message should be append_payload");
 
 		com = Translator.translate(1, 0);
 		assertEquals(com.getType(),
-				Command.DELETE, "Inputted translation should be delete");
+				Command.TYPE.DELETE, "Inputted translation should be delete");
 		assertFalse(com.containsPayload(), "Delete messages do not have payloads");
 	}
 }

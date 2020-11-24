@@ -1,9 +1,11 @@
 package dev.joshpetit.wit.core.model;
 
 public class Command {
-	public static int SYSTEM = 0;
-	public static int APPEND = 1;
-	public static int DELETE = 2;
+	public static class TYPE {
+		public static int SYSTEM = 0;
+		public static int APPEND = 1;
+		public static int DELETE = 2;
+	}
 	private int type;
 	private String payload;
 
@@ -28,4 +30,5 @@ public class Command {
 	public String getPayload() {
 		return this.payload;
 	}
+
 }
