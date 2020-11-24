@@ -1,7 +1,7 @@
 package dev.joshpetit.wit.core.base;
 
 import java.util.Properties;
-import dev.joshpetit.wit.core.model.Command;
+import dev.joshpetit.wit.core.model.*;
 
 public class Translator {
 	private static Properties config;
@@ -18,12 +18,8 @@ public class Translator {
 		} else {
 			String command = config.getProperty(key);
 			int type = command.charAt(0) - 48;
-			if (type == Command.TYPE.SYSTEM) {
-				return new Command(Command.TYPE.SYSTEM, command.substring(1));
-			} else if (type == Command.TYPE.APPEND) {
-				return new Command(Command.TYPE.APPEND, command.substring(1));
-			} else if (type == Command.TYPE.DELETE) {
-				return new Command(Command.TYPE.DELETE);
+			if (type == Command.TYPE.APPEND) {
+				return new AppendCommand("" + command.charAt(1), "" + command.charAt(2));
 			} else {
 				throw new IllegalArgumentException("Invalid Command Type");
 			}
