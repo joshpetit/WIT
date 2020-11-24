@@ -12,6 +12,15 @@ public class Command {
 		this.payload = payload;
 	}
 
+	public Command(int type) {
+		this.type = type;
+		this.payload = payload;
+	}
+
+	public boolean containsPayload() {
+		return payload != null;
+	}
+
 	public int getType() {
 		return this.type;
 	}
