@@ -1,6 +1,6 @@
 import static org.junit.jupiter.api.Assertions.*;
 import dev.joshpetit.wit.core.base.Translator;
-import dev.joshpetit.wit.core.model.Command;
+import dev.joshpetit.wit.core.model.*;
 
 import java.util.Properties;
 import org.junit.jupiter.api.Test;
@@ -11,28 +11,20 @@ class MainTest {
 	public static void setup() {
 		Properties config = new Properties();
 		config.setProperty("00", "0system_payload");
-		config.setProperty("01", "1append_payload");
+		config.setProperty("01", "1aA");
 		config.setProperty("10", "2no_payload");
 		Translator.setConfig(config);
 	}
 
 	@Test
 	void testTranslation() {
-		Command com = Translator.translate(0, 0);
-		assertEquals(com.getType(),
-				Command.TYPE.SYSTEM, "inputted translation should be system command");
-		assertEquals(com.getPayload(),
-				"system_payload", "System payload message should be command payload");
 
-		com = Translator.translate(0, 1);
+		Command com = Translator.translate(0, 1);
 		assertEquals(com.getType(),
 				Command.TYPE.APPEND, "Inputted translation should be append");
-		assertEquals(com.getPayload(),
-				"append_payload", "Payload message should be append_payload");
-
-		com = Translator.translate(1, 0);
-		assertEquals(com.getType(),
-				Command.TYPE.DELETE, "Inputted translation should be delete");
-		assertFalse(com.containsPayload(), "Delete messages do not have payloads");
+		assertTrue(com instanceof AppendCommand, "Command should be of type AppendCommand");
+		AppendCommand ac = (AppendCommand) com;
+		assertEquals(ac.getLower(), "a");
+		assertEquals(ac.getUpper(), "A");
 	}
 }
