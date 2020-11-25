@@ -12,6 +12,10 @@ public abstract class Command {
 		CAPS_LOCK;
 	}
 
+	public static enum DELETE {
+		CHAR, WORD
+	}
+
 	private int type;
 
 	public Command(int type) {

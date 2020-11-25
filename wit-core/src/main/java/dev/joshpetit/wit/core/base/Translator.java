@@ -23,6 +23,9 @@ public class Translator {
 			} else if (type == Command.TYPE.SYSTEM) {
 				int ctype = command.charAt(1) - 48;
 				return new SystemCommand(Command.SYSTEM.values()[ctype]);
+			} else if(type == Command.TYPE.DELETE){
+				int ctype = command.charAt(1) - 48;
+				return new DeleteCommand(Command.DELETE.values()[ctype]);
 			} else {
 				throw new IllegalArgumentException("Invalid Command Type");
 			}
