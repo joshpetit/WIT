@@ -4,15 +4,10 @@ import java.util.Properties;
 import dev.joshpetit.wit.core.model.*;
 
 public class Translator {
-	private static Properties config;
 
-	public static void setConfig(Properties config) {
-		Translator.config = config;
-	}
-
-	public static Command translate(int k1, int k2) {
+	public static Command translate(int k1, int k2, Properties config) {
 		String key = "" + k1 + k2;
-		if (!Translator.config.containsKey(key)) {
+		if (!config.containsKey(key)) {
 			throw new 
 				IllegalArgumentException("Key combo does not have an associated value");
 		} else {
