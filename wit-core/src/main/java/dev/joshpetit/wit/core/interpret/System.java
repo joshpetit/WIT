@@ -12,6 +12,7 @@ public abstract class System {
 
 	public input(int k1, int k2) {
 		Command c = Translator(k1, k2, this.config);
+		c.execute(this);
 	}
 
 	public boolean capsLockOn() {

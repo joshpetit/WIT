@@ -7,6 +7,11 @@ public class DeleteCommand extends Command {
 		this.delcmd = delcmd;
 	}
 
+	@Override
+	public void execute(System system) {
+
+	}
+
 	public Command.DELETE getCommand() {
 		return this.delcmd;
 	}

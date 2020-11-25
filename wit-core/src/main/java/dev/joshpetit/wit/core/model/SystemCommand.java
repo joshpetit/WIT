@@ -7,6 +7,11 @@ public class SystemCommand extends Command {
 		this.syscmd = syscmd;
 	}
 
+	@Override
+	public void execute(System system) {
+
+	}
+
 	/*
 	 * Corresponds to [Command.SYSTEM.COMMAND_ENUMERATION]
 	 */

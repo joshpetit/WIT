@@ -1,4 +1,5 @@
 package dev.joshpetit.wit.core.model;
+import dev.joshpetit.wit.interpret.System
 
 public abstract class Command {
 
@@ -17,6 +18,8 @@ public abstract class Command {
 	}
 
 	private int type;
+
+	public abstract void execute(System system);
 
 	public Command(int type) {
 		this.type = type;

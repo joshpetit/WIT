@@ -9,6 +9,11 @@ public class AppendCommand extends Command {
 		this.upper = upper;
 	}
 
+	@Override
+	public void execute(System system) {
+
+	}
+
 	public String getLower() {
 		return this.lower;
 	}
