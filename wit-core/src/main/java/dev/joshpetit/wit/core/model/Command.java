@@ -1,7 +1,7 @@
 package dev.joshpetit.wit.core.model;
-import dev.joshpetit.wit.interpret.System
+import dev.joshpetit.wit.core.interpret.System;
 
-public abstract class Command {
+abstract public class Command {
 
 	public static class TYPE {
 		public static int SYSTEM = 0;

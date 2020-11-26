@@ -1,4 +1,6 @@
 package dev.joshpetit.wit.core.model;
+import dev.joshpetit.wit.core.interpret.System;
+
 
 public class SystemCommand extends Command {
 	private Command.SYSTEM syscmd;
@@ -9,7 +11,7 @@ public class SystemCommand extends Command {
 
 	@Override
 	public void execute(System system) {
-
+		system.systemCommand(this);
 	}
 
 	/*
