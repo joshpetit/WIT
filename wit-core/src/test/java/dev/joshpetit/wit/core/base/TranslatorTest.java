@@ -1,3 +1,4 @@
+package dev.joshpetit.wit.base;
 import static org.junit.jupiter.api.Assertions.*;
 import dev.joshpetit.wit.core.base.Translator;
 import dev.joshpetit.wit.core.model.*;
