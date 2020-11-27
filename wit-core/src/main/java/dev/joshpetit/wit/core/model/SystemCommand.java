@@ -1,5 +1,5 @@
 package dev.joshpetit.wit.core.model;
-import dev.joshpetit.wit.core.interpret.System;
+import dev.joshpetit.wit.core.interpret.TypingSystem;
 
 
 public class SystemCommand extends Command {
@@ -9,8 +9,7 @@ public class SystemCommand extends Command {
 		this.syscmd = syscmd;
 	}
 
-	@Override
-	public void execute(System system) {
+	public void execute(TypingSystem system) {
 		system.systemCommand(this);
 	}
 

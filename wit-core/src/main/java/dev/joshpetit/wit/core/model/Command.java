@@ -1,5 +1,5 @@
 package dev.joshpetit.wit.core.model;
-import dev.joshpetit.wit.core.interpret.System;
+import dev.joshpetit.wit.core.interpret.TypingSystem;
 
 abstract public class Command {
 
@@ -19,7 +19,7 @@ abstract public class Command {
 
 	private int type;
 
-	public abstract void execute(System system);
+	public abstract void execute(TypingSystem system);
 
 	public Command(int type) {
 		this.type = type;

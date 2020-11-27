@@ -1,5 +1,5 @@
 package dev.joshpetit.wit.core.model;
-import dev.joshpetit.wit.core.interpret.System;
+import dev.joshpetit.wit.core.interpret.TypingSystem;
 
 public class DeleteCommand extends Command {
 	private Command.DELETE delcmd;
@@ -8,8 +8,7 @@ public class DeleteCommand extends Command {
 		this.delcmd = delcmd;
 	}
 
-	@Override
-	public void execute(System system) {
+	public void execute(TypingSystem system) {
 		system.deleteCommand(this);
 	}
 

@@ -1,5 +1,5 @@
 package dev.joshpetit.wit.core.model;
-import dev.joshpetit.wit.core.interpret.System;
+import dev.joshpetit.wit.core.interpret.TypingSystem;
 
 public class AppendCommand extends Command {
 	private String lower;
@@ -10,8 +10,7 @@ public class AppendCommand extends Command {
 		this.upper = upper;
 	}
 
-	@Override
-	public void execute(System system) {
+	public void execute(TypingSystem system) {
 		system.appendCommand(this);
 	}
 

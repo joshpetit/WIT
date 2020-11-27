@@ -3,10 +3,11 @@ import java.util.Properties;
 import dev.joshpetit.wit.core.base.Translator;
 import dev.joshpetit.wit.core.model.*;
 
-public abstract class System {
+public abstract class TypingSystem {
 	boolean capslock;
 	private Properties config;
-	public System(Properties config) {
+
+	public TypingSystem(Properties config) {
 		this.config = config;
 	}
 
