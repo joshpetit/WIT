@@ -1,0 +1,84 @@
+@startuml
+package core{
+	package base {
+		note top of InputInterpreter  
+			Parses the input from it's
+			desired way and outputs numbers
+			1-10. No specific implementation.\n
+			Future implementations may be able
+			to contain multiple TypingSystems
+		end note
+		abstract class InputInterpreter {
+			- system: TypingSystem
+			+ setTypingSystem(TypingSystem ts)
+			+ passInput(int key)
+		}
+
+
+		InputInterpreter -> TypingSystem: Nums 1-10
+		note bottom of TypingSystem
+			Holds the inputed values,
+			when needed values achieved
+			parses config file for needed
+			command
+		end note
+		class TypingSystem {
+			- inputs: List<Integer>
+			- context: Commandable
+			
+			+ input(int key)
+			+ executeCommand(Command c)
+			+ parseCommand(String keys) :: Command
+		}
+	}
+	note top of base
+		The base package contains the classes and interfaces
+		necessary to implement the WIT system.
+	end note
+	package commands {
+		interface Commandable {
+		}
+	note bottom of BasicCommandable
+		the TypingMovement object may contain a field
+		that tells the Context how much to move
+	end note
+		interface BasicCommandable extends AppendCommandable, SystemCommandable, DeleteCommandable {
+			+ typingAppend(String t)
+			+ typingMovement(TypingMovement o)
+			+ typingDelete(TypingDelete o)
+		}
+
+		interface AppendCommandable extends Commandable {
+			+ typingAppend(String t)
+		}
+
+		interface SystemCommandable extends Commandable {
+			+ typingMessage(SystemCommand t)
+		}
+
+		interface DeleteCommandable extends Commandable {
+			+ typingDelete(DeleteCommand t)
+		}
+
+		
+
+		class Command<C extends Commandable> {
+			+ executeCommand(C c)
+		}
+
+		class AppendCommand<AppendCommandable> extends Command {
+			+ executeCommand(AppendCommandable tc) 
+		}
+
+		class SystemCommand<SystemCommandable> extends Command {
+
+			+ executeCommand(SystemCommandable tc) 
+		}
+
+		class DeleteCommand<DeleteCommandable> extends Command {
+			+ executeCommand(DeleteCommandable tc)
+		}
+	}
+}
+
+@enduml
