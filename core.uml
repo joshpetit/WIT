@@ -27,7 +27,6 @@ package core{
 			- context: Commandable
 			
 			+ input(int key)
-			+ executeCommand(Command c)
 			+ parseCommand(String keys) :: Command
 		}
 	}
@@ -37,46 +36,39 @@ package core{
 	end note
 	package commands {
 		interface Commandable {
+
 		}
-	note bottom of BasicCommandable
-		the TypingMovement object may contain a field
-		that tells the Context how much to move
-	end note
+
 		interface BasicCommandable extends AppendCommandable, SystemCommandable, DeleteCommandable {
-			+ typingAppend(String t)
-			+ typingMovement(TypingMovement o)
-			+ typingDelete(TypingDelete o)
 		}
 
 		interface AppendCommandable extends Commandable {
-			+ typingAppend(String t)
+			+ typingAppend(AppendCommand c)
 		}
 
 		interface SystemCommandable extends Commandable {
-			+ typingMessage(SystemCommand t)
+			+ typingMessage(SystemCommand c)
 		}
 
 		interface DeleteCommandable extends Commandable {
-			+ typingDelete(DeleteCommand t)
+			+ typingDelete(DeleteCommand c)
 		}
 
-		
-
-		class Command<C extends Commandable> {
-			+ executeCommand(C c)
+		class Command {
 		}
 
-		class AppendCommand<AppendCommandable> extends Command {
-			+ executeCommand(AppendCommandable tc) 
+		class AppendCommand extends Command {
+			+ TYPE: Enum
+			- uppercase: String
+			- lowercase: String
 		}
 
-		class SystemCommand<SystemCommandable> extends Command {
-
-			+ executeCommand(SystemCommandable tc) 
+		class SystemCommand extends Command {
+			+ TYPE: Enum
 		}
 
-		class DeleteCommand<DeleteCommandable> extends Command {
-			+ executeCommand(DeleteCommandable tc)
+		class DeleteCommand extends Command {
+			+ TYPE: Enum
 		}
 	}
 }
