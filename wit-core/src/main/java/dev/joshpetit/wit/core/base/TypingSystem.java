@@ -3,12 +3,12 @@ import java.util.Properties;
 import java.util.List;
 import dev.joshpetit.wit.core.commands.*;
 
-public abstract class TypingSystem {
+public abstract class TypingSystem<T extends Commandable> {
 	protected StringBuilder inputs;
-	protected Commandable context;
+	protected T context;
 	protected Properties config;
 
-	public TypingSystem(Properties config, Commandable context) {
+	public TypingSystem(Properties config, T context) {
 		this.config = config;
 		this.context = context;
 	}
@@ -17,11 +17,11 @@ public abstract class TypingSystem {
 
 	public abstract void executeCommand(String key);
 
-	public void setContext(Commandable context) {
+	public void setContext( T context) {
 		this.context = context;
 	}
 
-	public Commandable getContext() {
+	public T getContext() {
 		return this.context;
 	}
 
