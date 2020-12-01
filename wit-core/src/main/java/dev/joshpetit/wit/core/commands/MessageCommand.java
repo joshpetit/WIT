@@ -1,7 +1,7 @@
 package dev.joshpetit.wit.core.commands;
 
 public class MessageCommand extends Command {
-	enum TYPE {
+	public enum TYPE {
 		CAPS_LOCK
 	}
 
