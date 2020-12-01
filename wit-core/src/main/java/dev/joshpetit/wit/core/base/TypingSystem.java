@@ -4,7 +4,7 @@ import java.util.List;
 import dev.joshpetit.wit.core.commands.*;
 
 public abstract class TypingSystem {
-	protected List<Integer> inputs;
+	protected StringBuilder inputs;
 	protected Commandable context;
 	protected Properties config;
 
