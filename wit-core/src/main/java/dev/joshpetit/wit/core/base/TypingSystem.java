@@ -3,9 +3,14 @@ import java.util.Properties;
 import java.util.List;
 import dev.joshpetit.wit.core.commands.*;
 
-public class TypingSystem {
+public abstract class TypingSystem {
 	private List<Integer> inputs;
 	private Commandable context;
+	private Properties config;
+
+	public TypingSystem(Properties config) {
+		this.config = config;
+	}
 
 	public void input(int key) {
 		inputs.add(key);
