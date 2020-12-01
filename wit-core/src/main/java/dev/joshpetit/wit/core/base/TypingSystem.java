@@ -15,7 +15,7 @@ public abstract class TypingSystem {
 
 	public abstract void input(int key);
 
-	public abstract void parseCommand(String key);
+	public abstract void executeCommand(String key);
 
 	public void setContext(Commandable context) {
 		this.context = context;
