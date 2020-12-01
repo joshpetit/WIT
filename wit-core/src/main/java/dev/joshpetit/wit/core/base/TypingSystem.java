@@ -8,8 +8,9 @@ public abstract class TypingSystem {
 	private Commandable context;
 	private Properties config;
 
-	public TypingSystem(Properties config) {
+	public TypingSystem(Properties config, Commandable context) {
 		this.config = config;
+		this.context = context;
 	}
 
 	public void input(int key) {
@@ -20,6 +21,10 @@ public abstract class TypingSystem {
 
 	public void setContext(Commandable context) {
 		this.context = context;
+	}
+
+	public Commandable getContext() {
+		return this.context;
 	}
 
 }
