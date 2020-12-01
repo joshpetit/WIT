@@ -13,9 +13,7 @@ public abstract class TypingSystem {
 		this.context = context;
 	}
 
-	public void input(int key) {
-		inputs.add(key);
-	}
+	public abstract void input(int key);
 
 	public abstract void parseCommand(String key);
 
