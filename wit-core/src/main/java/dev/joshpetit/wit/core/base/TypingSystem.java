@@ -4,9 +4,9 @@ import java.util.List;
 import dev.joshpetit.wit.core.commands.*;
 
 public abstract class TypingSystem {
-	private List<Integer> inputs;
-	private Commandable context;
-	private Properties config;
+	protected List<Integer> inputs;
+	protected Commandable context;
+	protected Properties config;
 
 	public TypingSystem(Properties config, Commandable context) {
 		this.config = config;
