@@ -25,5 +25,25 @@ class MainTest {
 			String res = s.getText();
 			assertEquals(res, "aaa");
 		}
+
+		@Test
+		void testTypingDelete() {
+			StringContext s = new StringContext();
+			AppendCommand letter = new AppendCommand("a", "A");
+			s.typingAppend(letter);
+			s.typingAppend(letter);
+			s.typingAppend(letter);
+
+			DeleteCommand deleteChar = new DeleteCommand(DeleteCommand.TYPE.CHAR);
+			s.typingDelete(deleteChar);
+			assertEquals(s.getText(), "aa");
+			
+			AppendCommand space = new AppendCommand(" ", " ");
+			s.typingAppend(space);
+			s.typingAppend(letter);
+			DeleteCommand deleteWord = new DeleteCommand(DeleteCommand.TYPE.WORD);
+			s.typingDelete(deleteWord);
+			assertEquals(s.getText(), "aa");
+		}
 	}
 }
