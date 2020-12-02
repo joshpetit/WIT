@@ -3,9 +3,9 @@ import java.util.Properties;
 import java.util.List;
 import dev.joshpetit.wit.core.commands.*;
 
-public class StringTypingSystem extends TypingSystem<BasicCommandable> {
+public class BasicTypingSystem extends TypingSystem<BasicCommandable> {
 	
-	public StringTypingSystem(Properties config, BasicCommandable context) {
+	public BasicTypingSystem(Properties config, BasicCommandable context) {
 		super(config, context);
 	}
 
