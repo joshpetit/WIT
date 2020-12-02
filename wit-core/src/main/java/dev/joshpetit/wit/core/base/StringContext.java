@@ -21,7 +21,15 @@ public class StringContext implements BasicCommandable {
 	}
 
 	public void typingDelete(DeleteCommand c) {
-
+		switch (c.getType()) {
+		case CHAR:
+			text.deleteCharAt(text.length() - 1);
+			break;
+		case WORD:
+			int lastSpace = text.lastIndexOf(" ");
+			text.delete(lastSpace, text.length() - 1);
+			break;
+		}
 	}
 
 	public void typingMessage(MessageCommand c) {
