@@ -27,7 +27,7 @@ public class StringContext implements BasicCommandable {
 			break;
 		case WORD:
 			int lastSpace = text.lastIndexOf(" ");
-			text.delete(lastSpace, text.length() - 1);
+			text.delete(lastSpace, text.length());
 			break;
 		}
 	}
