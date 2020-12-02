@@ -27,4 +27,8 @@ public class StringContext implements BasicCommandable {
 	public void typingMessage(MessageCommand c) {
 
 	}
+
+	public String getText() {
+		return text.toString();
+	}
 }
