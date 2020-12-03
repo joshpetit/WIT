@@ -1,10 +1,10 @@
 package dev.joshpetit.wit.core.base;
 
-import static org.junit.jupiter.api.Assertions.*;
 import dev.joshpetit.wit.core.commands.*;
 
 import java.util.Properties;
 import java.util.Arrays;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeAll;
 
 
-class SystemTest {
+class TypingSystemTest {
 
 	@Nested
 	@DisplayName("Tests for String Context")
@@ -42,6 +42,5 @@ class SystemTest {
 			bts.input(2);
 			assertTrue(called[2], "typingAppend command should have been called");
 		}
-
 	}
 }
