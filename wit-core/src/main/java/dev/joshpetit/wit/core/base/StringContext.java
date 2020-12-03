@@ -39,6 +39,10 @@ public class StringContext implements BasicCommandable {
 		}
 	}
 
+	public boolean capsLockOn() {
+		return this.capsLockOn;
+	}
+
 	public String getText() {
 		return text.toString();
 	}
