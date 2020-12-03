@@ -21,6 +21,7 @@ class ContextsTest {
 		AppendCommand appendSpace = new AppendCommand(" ", " ");
 		DeleteCommand deleteChar = new DeleteCommand(DeleteCommand.TYPE.CHAR);
 		DeleteCommand deleteWord = new DeleteCommand(DeleteCommand.TYPE.WORD);
+		MessageCommand capsLock = new MessageCommand(MessageCommand.TYPE.CAPS_LOCK);
 
 		@Test
 		void testTypingAppend() {
@@ -50,6 +51,28 @@ class ContextsTest {
 			s.typingAppend(appendWord);
 			s.typingDelete(deleteWord);
 			assertEquals(s.getText(), "aa");
+		}
+
+		@Test
+		void testTypingMessage() {
+			StringContext s = new StringContext();
+			s.typingMessage(capsLock);
+			assertTrue(s.capsLockOn());
+
+			s.typingAppend(appendWord);
+			assertEquals(s.getText(), "Abc");
+
+			s.typingAppend(appendLetter);
+			assertEquals(s.getText(), "AbcA");
+
+			s.typingAppend(appendSpace);
+			assertEquals(s.getText(), "AbcA ");
+
+			s.typingMessage(capsLock);
+			assertFalse(s.capsLockOn());
+
+			s.typingAppend(appendLetter);
+			assertEquals(s.getText(), "AbcA a");
 		}
 	}
 }
