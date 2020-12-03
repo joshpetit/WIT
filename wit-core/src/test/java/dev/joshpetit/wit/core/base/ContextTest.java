@@ -29,9 +29,11 @@ class ContextsTest {
 			s.typingAppend(c);
 			s.typingAppend(c);
 			s.typingAppend(c);
+			assertEquals(s.getText(), "aaa");
 
-			String res = s.getText();
-			assertEquals(res, "aaa");
+			s.typingAppend(appendSpace);
+			s.typingAppend(appendWord);
+			assertEquals(s.getText(), "aaa abc");
 		}
 
 		@Test
