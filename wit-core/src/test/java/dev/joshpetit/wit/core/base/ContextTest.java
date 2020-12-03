@@ -8,12 +8,20 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeAll;
 
 class ContextsTest {
 
 	@Nested
 	@DisplayName("Tests for String Context")
 	class StringContextCases {
+		AppendCommand appendLetter = new AppendCommand("a", "A");
+		// Possibly configure hot words to be appending with preceeding space
+		AppendCommand appendWord = new AppendCommand("abc", "Abc"); 
+		AppendCommand appendSpace = new AppendCommand(" ", " ");
+		DeleteCommand deleteChar = new DeleteCommand(DeleteCommand.TYPE.CHAR);
+		DeleteCommand deleteWord = new DeleteCommand(DeleteCommand.TYPE.WORD);
+
 		@Test
 		void testTypingAppend() {
 			StringContext s = new StringContext();
@@ -29,19 +37,15 @@ class ContextsTest {
 		@Test
 		void testTypingDelete() {
 			StringContext s = new StringContext();
-			AppendCommand letter = new AppendCommand("a", "A");
-			s.typingAppend(letter);
-			s.typingAppend(letter);
-			s.typingAppend(letter);
+			s.typingAppend(appendLetter);
+			s.typingAppend(appendLetter);
+			s.typingAppend(appendLetter);
 
-			DeleteCommand deleteChar = new DeleteCommand(DeleteCommand.TYPE.CHAR);
 			s.typingDelete(deleteChar);
 			assertEquals(s.getText(), "aa");
 			
-			AppendCommand space = new AppendCommand(" ", " ");
-			s.typingAppend(space);
-			s.typingAppend(letter);
-			DeleteCommand deleteWord = new DeleteCommand(DeleteCommand.TYPE.WORD);
+			s.typingAppend(appendSpace);
+			s.typingAppend(appendWord);
 			s.typingDelete(deleteWord);
 			assertEquals(s.getText(), "aa");
 		}
