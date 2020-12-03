@@ -2,11 +2,11 @@
 package core{
 	package base {
 		note top of InputInterpreter  
-			Parses the input from it's
+			Parses the input it's
 			desired way and outputs numbers
-			1-10. No specific implementation.\n
-			Future implementations may be able
-			to contain multiple TypingSystems
+			1-10. No specific implementation.
+			Future implementation may include
+			physical devices
 		end note
 		abstract class InputInterpreter {
 			- system: TypingSystem
@@ -20,14 +20,14 @@ package core{
 			Holds the inputed values,
 			when needed values achieved
 			parses config file for needed
-			command
+			command and passes it to corresponding
+			function within the Commandable context
 		end note
-		class TypingSystem {
-			- inputs: List<Integer>
+		abstract class TypingSystem {
 			- context: Commandable
 			
 			+ input(int key)
-			+ parseCommand(String keys) :: Command
+			+ executeCommand(String keys)
 		}
 	}
 	note top of base
@@ -39,22 +39,22 @@ package core{
 
 		}
 
-		interface BasicCommandable extends AppendCommandable, SystemCommandable, DeleteCommandable {
+		interface BasicCommandable extends AppendCommandable, MessageCommandable, DeleteCommandable {
 		}
 
 		interface AppendCommandable extends Commandable {
 			+ typingAppend(AppendCommand c)
 		}
 
-		interface SystemCommandable extends Commandable {
-			+ typingMessage(SystemCommand c)
+		interface MessageCommandable extends Commandable {
+			+ typingMessage(MessageCommand c)
 		}
 
 		interface DeleteCommandable extends Commandable {
 			+ typingDelete(DeleteCommand c)
 		}
 
-		class Command {
+		abstract class Command {
 		}
 
 		class AppendCommand extends Command {
@@ -63,7 +63,7 @@ package core{
 			- lowercase: String
 		}
 
-		class SystemCommand extends Command {
+		class MessageCommand extends Command {
 			+ TYPE: Enum
 		}
 
