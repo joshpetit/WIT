@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.BeforeAll;
 
-class MainTest {
+class ContextsTest {
 
 	@Nested
 	@DisplayName("Tests for String Context")
