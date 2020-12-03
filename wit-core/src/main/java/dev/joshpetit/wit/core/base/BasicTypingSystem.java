@@ -4,13 +4,15 @@ import java.util.List;
 import dev.joshpetit.wit.core.commands.*;
 
 public class BasicTypingSystem extends TypingSystem<BasicCommandable> {
+	protected StringBuilder inputs;
 	
 	public BasicTypingSystem(Properties config, BasicCommandable context) {
 		super(config, context);
+		inputs = new StringBuilder();
 	}
 
 	public void input(int key) {
-		this.inputs.append(key);
+		inputs.append(key);
 		if (! (inputs.length() > 1)) return;
 		executeCommand(inputs.toString());
 		inputs.setLength(0);
