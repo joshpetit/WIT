@@ -1,12 +1,15 @@
 package dev.joshpetit.wit.core.base;
 public abstract class InputInterpreter {
-	private TypingSystem ts;
+	protected TypingSystem typingSystem;
+	public InputInterpreter(TypingSystem ts) {
+		this.typingSystem = typingSystem;
+	}
 
 	public void setTypingSystem(TypingSystem ts) {
-		this.ts = ts;
+		this.typingSystem = typingSystem;
 	}
 
 	public void passInput(int key) {
-		ts.input(key);
+		typingSystem.input(key);
 	}
 }
