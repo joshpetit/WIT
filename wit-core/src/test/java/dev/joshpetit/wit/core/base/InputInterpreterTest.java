@@ -16,14 +16,16 @@ class InputInterpreterTest {
 
 	@Nested
 	@DisplayName("Test BasicCLInterpreter")
-	class BasicCLInterpreter {
+	class BasicCLInterpreterTest {
 
 		@Test
 		void interactive() {
 			Properties config = new Properties();
 			try{
 			config.load(InputInterpreter.class.getResourceAsStream("defaultConfig.properties"));
-
+			StringContext context = new StringContext();
+			TypingSystem ts = new BasicTypingSystem(config, context);
+			BasicCLInterpreter interpreter = new BasicCLInterpreter(ts);
 			} catch(IOException e) {
 				e.printStackTrace();
 			}
