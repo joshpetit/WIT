@@ -1,6 +1,7 @@
 package dev.joshpetit.wit.core.base;
 import dev.joshpetit.wit.core.commands.*;
 import java.io.IOException;
+import java.io.ByteArrayInputStream;
 
 import java.util.Properties;
 import java.util.Arrays;
@@ -26,6 +27,11 @@ class InputInterpreterTest {
 			StringContext context = new StringContext();
 			TypingSystem ts = new BasicTypingSystem(config, context);
 			BasicCLInterpreter interpreter = new BasicCLInterpreter(ts);
+			
+			InputStream orgSysIn = System.in;
+			ByteArrayInputStream in = new ByteArrayInputStream("a\nb\nc\nd\ne\nf\ng\nh\ni\nj".getBytes());
+			interpreter.setInputStream(in);
+			interpreter.setMappings();
 			} catch(IOException e) {
 				e.printStackTrace();
 			}
