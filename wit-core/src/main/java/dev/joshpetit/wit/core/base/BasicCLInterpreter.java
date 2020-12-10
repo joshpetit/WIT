@@ -12,13 +12,11 @@ public class BasicCLInterpreter extends InputInterpreter {
 	public BasicCLInterpreter(TypingSystem ts) {
 		super(ts);
 		reader = new BufferedReader(new InputStreamReader(System.in));
-		createMappings();
 	}
 
 	public void createMappings() {
 		map = new HashMap<>();
 		for(int i=0; i < 10; i++) {
-
 		try {
 			map.put(reader.readLine(), i);
 			System.out.println(map);
@@ -26,6 +24,18 @@ public class BasicCLInterpreter extends InputInterpreter {
 			e.printStackTrace();
 		}
 
+		}
+	}
+
+	public void setMappings() {
+		createMappings();
+	}
+
+	public void setMappings(Map<String, Integer> map) {
+		if (map == null) {
+			return null;
+		} else {
+			this.map = map;
 		}
 	}
 }
