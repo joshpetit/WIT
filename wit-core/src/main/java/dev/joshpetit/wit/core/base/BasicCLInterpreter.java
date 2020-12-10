@@ -1,5 +1,6 @@
 package dev.joshpetit.wit.core.base;
 import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Map;
@@ -14,7 +15,7 @@ public class BasicCLInterpreter extends InputInterpreter {
 		reader = new BufferedReader(new InputStreamReader(System.in));
 	}
 
-	public void createMappings() {
+	private void createMappings() {
 		map = new HashMap<>();
 		for(int i=0; i < 10; i++) {
 		try {
@@ -23,8 +24,11 @@ public class BasicCLInterpreter extends InputInterpreter {
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
-
 		}
+	}
+
+	public void setInputStream(InputStream stream) {
+		reader = new BufferedReader(new InputStreamReader(stream));
 	}
 
 	public void setMappings() {
@@ -33,7 +37,7 @@ public class BasicCLInterpreter extends InputInterpreter {
 
 	public void setMappings(Map<String, Integer> map) {
 		if (map == null) {
-			return null;
+			return;
 		} else {
 			this.map = map;
 		}
