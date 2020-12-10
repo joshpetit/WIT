@@ -1,16 +1,18 @@
 package dev.joshpetit.wit.core.base;
 
-import dev.joshpetit.wit.core.commands.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Properties;
-import java.util.Arrays;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeAll;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+
+import dev.joshpetit.wit.core.commands.*;
 
 class TypingSystemTest {
 
@@ -25,6 +27,7 @@ class TypingSystemTest {
 				public void typingMessage(MessageCommand c) {called[0] = true;}
 				public void typingDelete(DeleteCommand c) {called[1] = true;}
 				public void typingAppend(AppendCommand c) {called[2] = true;}
+				Map<String, Integer> s = new HashMap<>();
 			};
 			Properties props = new Properties();
 			props.setProperty("00", "00");
