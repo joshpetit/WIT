@@ -50,8 +50,9 @@ public class BasicCLInterpreter extends InputInterpreter {
 
 	public void start() {
 		String s;
+		read = true;
 		try {
-			while((s = reader.readLine()) != null) {
+			while(read && (s = reader.readLine()) != null) {
 				System.out.println(s);
 			} 		
 		}
