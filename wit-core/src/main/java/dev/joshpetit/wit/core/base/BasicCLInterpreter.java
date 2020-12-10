@@ -9,6 +9,7 @@ import java.util.HashMap;
 public class BasicCLInterpreter extends InputInterpreter {
 	protected Map<String, Integer> map;
 	private BufferedReader reader;
+	private boolean read;
 
 	public BasicCLInterpreter(TypingSystem ts) {
 		super(ts);
@@ -20,7 +21,6 @@ public class BasicCLInterpreter extends InputInterpreter {
 		for(int i=0; i < 10; i++) {
 		try {
 			map.put(reader.readLine(), i);
-			System.out.println(map);
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -46,5 +46,21 @@ public class BasicCLInterpreter extends InputInterpreter {
 		} else {
 			this.map = map;
 		}
+	}
+
+	public void start() {
+		String s;
+		try {
+			while((s = reader.readLine()) != null) {
+				System.out.println(s);
+			} 		
+		}
+		 catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void stop() {
+		read = false;
 	}
 }
