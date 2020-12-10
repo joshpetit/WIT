@@ -31,6 +31,11 @@ public class BasicCLInterpreter extends InputInterpreter {
 		reader = new BufferedReader(new InputStreamReader(stream));
 	}
 
+
+	public Map<String, Integer> getMappings() {
+		return this.map;
+	}
+
 	public void setMappings() {
 		createMappings();
 	}
