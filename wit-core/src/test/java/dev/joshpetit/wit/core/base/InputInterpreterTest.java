@@ -11,8 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 
 
 class InputInterpreterTest {
@@ -20,10 +19,23 @@ class InputInterpreterTest {
 	@Nested
 	@DisplayName("Test BasicCLInterpreter")
 	class BasicCLInterpreterTest {
+		Properties config;
+		StringContext context;
+		TypingSystem ts;
+		@BeforeEach
+		void setup() {
+			try{
+				config = new Properties();
+				config.load(InputInterpreter.class.getResourceAsStream("defaultConfig.properties"));
+				context = new StringContext();
+				ts = new BasicTypingSystem(config, context);
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
+		}
 
 		@Test
 		void testMappingCreation() {
-			Properties config = new Properties();
 			Map<String, Integer> expectedMapping = new HashMap<>();
 			expectedMapping.put("a", 0);
 			expectedMapping.put("b", 1);
@@ -35,18 +47,11 @@ class InputInterpreterTest {
 			expectedMapping.put("h", 7);
 			expectedMapping.put("i", 8);
 			expectedMapping.put("j", 9);
-			try{
-				config.load(InputInterpreter.class.getResourceAsStream("defaultConfig.properties"));
-				StringContext context = new StringContext();
-				TypingSystem ts = new BasicTypingSystem(config, context);
-				BasicCLInterpreter interpreter = new BasicCLInterpreter(ts);
-				ByteArrayInputStream in = new ByteArrayInputStream("a\nb\nc\nd\ne\nf\ng\nh\ni\nj".getBytes());
-				interpreter.setInputStream(in);
-				interpreter.setMappings();
-				assertEquals(interpreter.getMappings(), expectedMapping);
-			} catch(IOException e) {
-				e.printStackTrace();
-			}
+			BasicCLInterpreter interpreter = new BasicCLInterpreter(ts);
+			ByteArrayInputStream in = new ByteArrayInputStream("a\nb\nc\nd\ne\nf\ng\nh\ni\nj".getBytes());
+			interpreter.setInputStream(in);
+			interpreter.setMappings();
+			assertEquals(interpreter.getMappings(), expectedMapping);
 		}
 	}
 }
