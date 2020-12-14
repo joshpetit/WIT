@@ -10,6 +10,7 @@ public class BasicCLInterpreter extends InputInterpreter {
 	protected Map<String, Integer> map;
 	private BufferedReader reader;
 	private boolean read;
+	private boolean newLine;
 
 	public BasicCLInterpreter(TypingSystem ts) {
 		super(ts);
@@ -20,7 +21,11 @@ public class BasicCLInterpreter extends InputInterpreter {
 		map = new HashMap<>();
 		for(int i=0; i < 10; i++) {
 		try {
-			map.put(reader.readLine(), i);
+			if (newLine) {
+				map.put(reader.readLine(), i);
+			} else {
+				map.put("" + (char) reader.read(), i);
+			}
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -31,6 +36,9 @@ public class BasicCLInterpreter extends InputInterpreter {
 		reader = new BufferedReader(new InputStreamReader(stream));
 	}
 
+	public void newLineDenotation(boolean b) {
+		this.newLine = b;
+	}
 
 	public Map<String, Integer> getMappings() {
 		return this.map;
@@ -52,6 +60,11 @@ public class BasicCLInterpreter extends InputInterpreter {
 		String s;
 		read = true;
 		try {
+			if (newLine) {
+				s = reader.readLine();
+			} else { 
+				s = "" + (char) reader.read();
+			}
 			while(read && (s = reader.readLine()) != null) {
 				System.out.println(s);
 			} 		
