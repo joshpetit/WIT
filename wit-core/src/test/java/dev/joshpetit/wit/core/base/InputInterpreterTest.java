@@ -49,7 +49,7 @@ class InputInterpreterTest {
 			expectedMapping.put("i", 8);
 			expectedMapping.put("j", 9);
 
-			BasicCLInterpreter interpreter = new BasicCLInterpreter(ts);
+			BasicStreamInterpreter interpreter = new BasicStreamInterpreter(ts);
 			interpreter.newLineDenotation(false);
 			ByteArrayInputStream in = new ByteArrayInputStream("abcdefghij".getBytes());
 			interpreter.setInputStream(in);
@@ -77,7 +77,7 @@ class InputInterpreterTest {
 
 				}
 			};
-			BasicCLInterpreter interpreter = new BasicCLInterpreter(system);
+			BasicStreamInterpreter interpreter = new BasicStreamInterpreter(system);
 
 			ByteArrayInputStream mappings = new ByteArrayInputStream("abcdefghij".getBytes());
 			interpreter.setInputStream(mappings);

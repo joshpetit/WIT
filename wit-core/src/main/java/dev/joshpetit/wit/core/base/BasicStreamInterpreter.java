@@ -6,13 +6,13 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.HashMap;
 
-public class BasicCLInterpreter extends InputInterpreter {
+public class BasicStreamInterpreter extends InputInterpreter {
 	protected Map<String, Integer> map;
 	private BufferedReader reader;
 	private boolean read;
 	private boolean newLine;
 
-	public BasicCLInterpreter(TypingSystem ts) {
+	public BasicStreamInterpreter(TypingSystem ts) {
 		super(ts);
 		reader = new BufferedReader(new InputStreamReader(System.in));
 	}
