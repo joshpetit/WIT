@@ -57,18 +57,12 @@ public class BasicStreamInterpreter extends InputInterpreter {
 	}
 
 	public void start() {
-		String s;
+		String s = "";
 		int c = '\u0000';
 		int num = -1;
 		read = true;
 		try {
-			if (newLine) {
-				s = reader.readLine();
-			} else {
-				c = reader.read();
-				s = c == -1 ? null : "" + (char) c;
-			}
-			while(s != null) {
+			do{
 				num = map.getOrDefault(s, -1);
 				if (num != -1) {
 					typingSystem.input(num);
@@ -79,7 +73,7 @@ public class BasicStreamInterpreter extends InputInterpreter {
 					c = reader.read();
 					s = c == -1 ? null : "" + (char) c;
 				}
-			} 		
+			} while(s != null) ;
 		}
 		 catch(IOException e) {
 			e.printStackTrace();
