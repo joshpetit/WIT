@@ -58,7 +58,7 @@ class InputInterpreterTest {
 
 
 			interpreter.newLineDenotation(true);
-			in = new ByteArrayInputStream("a\nb\nc\nd\ne\nf\ng\nh\ni\nj".getBytes());
+			in = new ByteArrayInputStream("a\nb\nc\nd\ne\nf\ng\nh\ni\nj\n".getBytes());
 			interpreter.setInputStream(in);
 			interpreter.setMappings();
 			assertEquals(interpreter.getMappings(), expectedMapping);
@@ -66,14 +66,33 @@ class InputInterpreterTest {
 
 		@Test
 		void testInput() {
-			// Create Anonymous class to Test correct inputs
-			BasicCLInterpreter interpreter = new BasicCLInterpreter(ts);
-			ByteArrayInputStream in = new ByteArrayInputStream("a\nb\nc\nd\ne\nf\ng\nh\ni\nj".getBytes());
-			interpreter.setInputStream(in);
+			StringBuilder expected = new StringBuilder();
+			TypingSystem system = new TypingSystem(config, context) {
+
+				public void input(int key) {
+					expected.append(key);
+				}
+
+				public void executeCommand(String key) {
+
+				}
+			};
+			BasicCLInterpreter interpreter = new BasicCLInterpreter(system);
+
+			ByteArrayInputStream mappings = new ByteArrayInputStream("abcdefghij".getBytes());
+			interpreter.setInputStream(mappings);
 			interpreter.setMappings();
-			in = new ByteArrayInputStream("a\nb\nc\nd\ne\nf\ng\nh\ni\nj".getBytes());
-			interpreter.setInputStream(in);
+
+			ByteArrayInputStream inputs = new ByteArrayInputStream("aabb".getBytes());
+			interpreter.setInputStream(inputs);
 			interpreter.start();
+			assertEquals(expected.toString(), "0011");
+
+			expected.delete(0, expected.length());
+			inputs = new ByteArrayInputStream("ajab".getBytes());
+			interpreter.setInputStream(inputs);
+			interpreter.start();
+			assertEquals(expected.toString(), "0901");
 		}
 	}
 }
