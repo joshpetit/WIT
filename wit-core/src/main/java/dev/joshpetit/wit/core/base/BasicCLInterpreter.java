@@ -58,15 +58,27 @@ public class BasicCLInterpreter extends InputInterpreter {
 
 	public void start() {
 		String s;
+		int c = '\u0000';
+		int num = -1;
 		read = true;
 		try {
 			if (newLine) {
 				s = reader.readLine();
-			} else { 
-				s = "" + (char) reader.read();
+			} else {
+				c = reader.read();
+				s = c == -1 ? null : "" + (char) c;
 			}
-			while(read && (s = reader.readLine()) != null) {
-				System.out.println(s);
+			while(s != null) {
+				num = map.getOrDefault(s, -1);
+				if (num != -1) {
+					typingSystem.input(num);
+				}
+				if (newLine) {
+					s = reader.readLine();
+				} else {
+					c = reader.read();
+					s = c == -1 ? null : "" + (char) c;
+				}
 			} 		
 		}
 		 catch(IOException e) {
