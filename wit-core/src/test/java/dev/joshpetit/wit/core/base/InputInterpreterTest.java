@@ -18,8 +18,8 @@ import dev.joshpetit.wit.core.commands.*;
 class InputInterpreterTest {
 
 	@Nested
-	@DisplayName("Test BasicCLInterpreter")
-	class BasicCLInterpreterTest {
+	@DisplayName("Test StreamInterpreter")
+	class StreamInterpreterTest {
 		Properties config;
 		StringContext context;
 		TypingSystem ts;
@@ -49,7 +49,7 @@ class InputInterpreterTest {
 			expectedMapping.put("i", 8);
 			expectedMapping.put("j", 9);
 
-			BasicStreamInterpreter interpreter = new BasicStreamInterpreter(ts);
+			StreamInterpreter interpreter = new StreamInterpreter(ts);
 			interpreter.newLineDenotation(false);
 			ByteArrayInputStream in = new ByteArrayInputStream("abcdefghij".getBytes());
 			interpreter.setInputStream(in);
@@ -77,7 +77,7 @@ class InputInterpreterTest {
 
 				}
 			};
-			BasicStreamInterpreter interpreter = new BasicStreamInterpreter(system);
+			StreamInterpreter interpreter = new StreamInterpreter(system);
 
 			ByteArrayInputStream mappings = new ByteArrayInputStream("abcdefghij".getBytes());
 			interpreter.setInputStream(mappings);
