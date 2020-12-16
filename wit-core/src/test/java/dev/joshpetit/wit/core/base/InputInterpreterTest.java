@@ -21,15 +21,21 @@ class InputInterpreterTest {
 	@DisplayName("Test StreamInterpreter")
 	class StreamInterpreterTest {
 		Properties config;
-		StringContext context;
+		Commandable context;
 		TypingSystem ts;
 		@BeforeEach
 		void setup() {
 			try{
 				config = new Properties();
+				ts = new TypingSystem(config, context) {
+					public void input(int key) {
+					}
+					public void executeCommand(String key) {
+					}
+				};
 				config.load(InputInterpreter.class.getResourceAsStream("defaultConfig.properties"));
-				context = new StringContext();
-				ts = new BasicTypingSystem(config, context);
+				context = new Commandable() {
+				};
 			} catch(IOException e) {
 				e.printStackTrace();
 			}
@@ -100,7 +106,7 @@ class InputInterpreterTest {
 	@DisplayName("Test StringInterpreter")
 	class StringInterpreterTest {
 		Properties config;
-		StringContext context;
+		Commandable context;
 		TypingSystem ts;
 
 		@BeforeEach
@@ -108,8 +114,14 @@ class InputInterpreterTest {
 			try{
 				config = new Properties();
 				config.load(InputInterpreter.class.getResourceAsStream("defaultConfig.properties"));
-				context = new StringContext();
-				ts = new BasicTypingSystem(config, context);
+				context = new Commandable() {
+				};
+				ts = new TypingSystem(config, context) {
+					public void input(int key) {
+					}
+					public void executeCommand(String key) {
+					}
+				};
 			} catch(IOException e) {
 				e.printStackTrace();
 			}
