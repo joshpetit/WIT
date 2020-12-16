@@ -155,5 +155,38 @@ class InputInterpreterTest {
 
 			assertEquals(interpreter.getMappings(), expectedMapping);
 		}
+
+		@Test
+		void testInput() {
+			StringBuilder expected = new StringBuilder();
+			TypingSystem system = new TypingSystem(config, context) {
+
+				public void input(int key) {
+					expected.append(key);
+				}
+
+				public void executeCommand(String key) {
+
+				}
+			};
+			StringInterpreter interpreter = new StringInterpreter(system);
+			interpreter.addMapping("zero", 0);
+			interpreter.addMapping("one", 1);
+			interpreter.addMapping("two", 2);
+			interpreter.addMapping("three", 3);
+			interpreter.addMapping("four", 4);
+			interpreter.addMapping("five", 5);
+			interpreter.addMapping("six", 6);
+			interpreter.addMapping("seven", 7);
+			interpreter.addMapping("eight", 8);
+			interpreter.addMapping("nine", 9);
+
+			interpreter.input("zero");
+			interpreter.input("zero");
+			interpreter.input("three");
+			interpreter.input("nine");
+
+			assertEquals("0039", expected.toString());
+		}
 	}
 }
