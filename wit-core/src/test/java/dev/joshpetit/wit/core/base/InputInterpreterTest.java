@@ -95,4 +95,53 @@ class InputInterpreterTest {
 			assertEquals(expected.toString(), "0901");
 		}
 	}
+
+	@Nested
+	@DisplayName("Test StringInterpreter")
+	class StringInterpreterTest {
+		Properties config;
+		StringContext context;
+		TypingSystem ts;
+
+		@BeforeEach
+		void setup() {
+			try{
+				config = new Properties();
+				config.load(InputInterpreter.class.getResourceAsStream("defaultConfig.properties"));
+				context = new StringContext();
+				ts = new BasicTypingSystem(config, context);
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		@Test
+		void testMappingCreation() {
+			Map<String, Integer> expectedMapping = new HashMap<>();
+			StringInterpreter interpreter = new StringInterpreter(ts);
+			expectedMapping.put("zero", 0);
+			expectedMapping.put("one", 1);
+			expectedMapping.put("two", 2);
+			expectedMapping.put("three", 3);
+			expectedMapping.put("four", 4);
+			expectedMapping.put("five", 5);
+			expectedMapping.put("six", 6);
+			expectedMapping.put("seven", 7);
+			expectedMapping.put("eight", 8);
+			expectedMapping.put("nine", 9);
+
+			interpreter.addMapping("zero", 0);
+			interpreter.addMapping("one", 1);
+			interpreter.addMapping("two", 2);
+			interpreter.addMapping("three", 3);
+			interpreter.addMapping("four", 4);
+			interpreter.addMapping("five", 5);
+			interpreter.addMapping("six", 6);
+			interpreter.addMapping("seven", 7);
+			interpreter.addMapping("eight", 8);
+			interpreter.addMapping("nine", 9);
+
+			assertEquals(interpreter.getMappings(), expectedMapping);
+		}
+	}
 }
