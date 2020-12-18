@@ -1,5 +1,6 @@
 plugins {
 	id 'java-library'
+    id "com.scuilion.syntastic" version "0.3.8"
 }
 
 repositories {

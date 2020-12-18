@@ -29,7 +29,7 @@ Session.vim
 Sessionx.vim
 gui.vim
 core.vim
-
+.syntastic_javac_config
 # Temporary
 .netrwhist
 *~
