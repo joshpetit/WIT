@@ -1,29 +1,48 @@
 package dev.joshpetit.wit.gui.launcher;
 
-import javafx.geometry.Pos;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.control.TextArea;
+import java.io.IOException;
+
+import dev.joshpetit.wit.core.base.BasicTypingSystem;
+import dev.joshpetit.wit.core.base.StringInterpreter;
+import dev.joshpetit.wit.core.base.TypingSystem;
 import dev.joshpetit.wit.core.commands.AppendCommand;
 
-public class Main extends Application {
+import javafx.application.Application;
 
+import javafx.geometry.Pos;
+
+import javafx.scene.Scene;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import java.util.Properties;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+    CommandableTextArea area;
+    TypingSystem ts;
+    StringInterpreter controller;
+    Properties config;
+
+    public void createInterpreter() {
+        try {
+            config = BasicTypingSystem.getDefaultProperties();
+            area = new CommandableTextArea("Demo");
+            ts = new BasicTypingSystem(config, area);
+            controller = new StringInterpreter(ts);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void start(Stage primaryStage) {
+        createInterpreter();
+
         Pane root = new Pane();
         HBox hbox = new HBox();
         hbox.setAlignment(Pos.CENTER);
-
-        CommandableTextArea area = new CommandableTextArea("Demo");
-        AppendCommand com = new AppendCommand("upper", "lower");
-
-        area.typingAppend(com);
-
         VBox vbox = new VBox();
         vbox.setAlignment(Pos.CENTER);
         hbox.getChildren().add(area);
