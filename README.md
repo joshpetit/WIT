@@ -43,9 +43,8 @@ concept is finished but actual implementations are still being created.
 
 ### WIT-GUI
 
-WIT-GUI currently has no implementation but will be a simple application based on JavaFX.
-WIT-GUI will double as a text editor that demonstrates the uses of the WIT-CORE and also a configuration editor 
-for the application.
+WIT-GUI is planned to be a demo application that uses WIT-CORE and a possible configuration editor. It's currently implemented with a disabled textfield that implements
+the needed classes, the goal is to create an implementation for all the textfield methods based upon the new typing system.
 
 ## Looking Forward
 
