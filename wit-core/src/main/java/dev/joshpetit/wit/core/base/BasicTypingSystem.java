@@ -1,6 +1,9 @@
 package dev.joshpetit.wit.core.base;
-import java.util.Properties;
+import java.io.IOException;
+
 import java.util.List;
+import java.util.Properties;
+
 import dev.joshpetit.wit.core.commands.*;
 
 public class BasicTypingSystem extends TypingSystem<BasicCommandable> {
@@ -46,5 +49,11 @@ public class BasicTypingSystem extends TypingSystem<BasicCommandable> {
 				return new AppendCommand("" + command.charAt(1), "" + command.charAt(2));
 		}
 		return null;
+	}
+
+	public static Properties getDefaultProperties() throws IOException {
+		Properties config = new Properties();
+		config.load(InputInterpreter.class.getResourceAsStream("defaultConfig.properties"));
+		return config;
 	}
 }
