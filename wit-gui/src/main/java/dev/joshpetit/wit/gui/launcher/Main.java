@@ -11,6 +11,8 @@ import javafx.application.Application;
 
 import javafx.geometry.Pos;
 
+import javafx.event.EventHandler;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
@@ -24,11 +26,13 @@ public class Main extends Application {
     TypingSystem ts;
     StringInterpreter controller;
     Properties config;
+    int index;
 
     public void createInterpreter() {
         try {
             config = BasicTypingSystem.getDefaultProperties();
             area = new CommandableTextArea("Demo");
+            area.setDisable(true);
             ts = new BasicTypingSystem(config, area);
             controller = new StringInterpreter(ts);
         } catch (IOException e) {
@@ -39,8 +43,19 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         createInterpreter();
-
         Pane root = new Pane();
+        root.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent e) {
+                if (index != 10) {
+                    controller.addMapping(e.getCode().toString(), index);
+                    index++;
+                } else {
+                    controller.input(e.getCode().toString());
+                }
+            }
+        });
+
         HBox hbox = new HBox();
         hbox.setAlignment(Pos.CENTER);
         VBox vbox = new VBox();
@@ -54,6 +69,8 @@ public class Main extends Application {
         primaryStage.setTitle("WIT - Blind Keyboard");
         primaryStage.setScene(scene);
         primaryStage.show();
+        root.requestFocus();
+        System.out.println(scene.focusOwnerProperty().get());
     }
 
      public static void main(String[] args) {
