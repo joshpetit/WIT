@@ -20,14 +20,15 @@ public class CommandableTextArea extends TextArea implements BasicCommandable{
     }
 
 	public void typingDelete(DeleteCommand c) {
-		if (c.getType() == DeleteCommand.TYPE.CHAR) {
-			System.out.println("delete");
-			deletePreviousChar();
-		} else {
-			System.out.println("word del");
-			previousWord();
-			selectNextWord();
-			replaceSelection("");
+		switch(c.getType()) {
+			case CHAR:
+				deletePreviousChar();
+				break;
+			case WORD:
+				previousWord();
+				selectNextWord();
+				replaceSelection("");
+				break;
 		}
 	}
 
