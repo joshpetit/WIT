@@ -10,17 +10,32 @@ public class CommandableTextArea extends TextArea implements BasicCommandable{
 	public CommandableTextArea() {
 		super();
 	}
+
 	public CommandableTextArea(String text) {
 		super(text);
 	}
 
 	public void typingAppend(AppendCommand c) {
 		appendText( capsLockOn ? c.getUpper() : c.getLower());
-		// commitValue();
     }
-	public void typingDelete(DeleteCommand c) {
 
+	public void typingDelete(DeleteCommand c) {
+		if (c.getType() == DeleteCommand.TYPE.CHAR) {
+			System.out.println("delete");
+			deletePreviousChar();
+		} else {
+			System.out.println("word del");
+			previousWord();
+			selectNextWord();
+			replaceSelection("");
+		}
 	}
+
+    @Override
+    public void requestFocus() {
+
+    }
+
 	public void typingMessage(MessageCommand c) {
 
 	}
