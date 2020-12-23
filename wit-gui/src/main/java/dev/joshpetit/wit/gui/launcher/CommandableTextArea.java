@@ -32,12 +32,15 @@ public class CommandableTextArea extends TextArea implements BasicCommandable{
 		}
 	}
 
+	public void typingMessage(MessageCommand c) {
+		switch(c.getType()) {
+			case CAPS_LOCK:
+				capsLockOn = !capsLockOn;
+		}
+	}
+
     @Override
     public void requestFocus() {
 
     }
-
-	public void typingMessage(MessageCommand c) {
-
-	}
 }
