@@ -32,13 +32,15 @@ public class Main extends Application {
         try {
             config = BasicTypingSystem.getDefaultProperties();
             area = new CommandableTextArea("Demo");
-            area.setDisable(true);
+            //area.setDisable(true);
+            area.setOpacity(1);
             ts = new BasicTypingSystem(config, area);
             controller = new StringInterpreter(ts);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     @Override
     public void start(Stage primaryStage) {
@@ -70,7 +72,6 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         root.requestFocus();
-        System.out.println(scene.focusOwnerProperty().get());
     }
 
      public static void main(String[] args) {
