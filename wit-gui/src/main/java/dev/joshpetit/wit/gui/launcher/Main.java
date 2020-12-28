@@ -1,7 +1,9 @@
 package dev.joshpetit.wit.gui.launcher;
-import javafx.geometry.Insets;
-
 import java.io.IOException;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 import dev.joshpetit.wit.core.base.BasicTypingSystem;
 import dev.joshpetit.wit.core.base.StringInterpreter;
@@ -10,18 +12,20 @@ import dev.joshpetit.wit.core.commands.AppendCommand;
 
 import javafx.application.Application;
 
+import javafx.event.EventHandler;
+
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
-import javafx.event.EventHandler;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.HBox;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import java.util.Properties;
 import javafx.scene.shape.Rectangle;
+
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -30,8 +34,12 @@ public class Main extends Application {
     StringInterpreter controller;
     Properties config;
     int index;
+    Map<Integer, Pane> indexedPanes;
+    Map<String, Pane> referencedPanes;
 
+    //TODO: Set minimal height for panes
     public Pane createButtonDisplay() {
+        indexedPanes = new HashMap<>();
         int rowSpacing = 30;
         int buttonSpacing = 11;
         int buttonHeight = 200;
@@ -64,18 +72,20 @@ public class Main extends Application {
             } else {
                 lr1.getChildren().add(p);
             }
+            indexedPanes.put(i, p);
         }
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 5; i < 10; i++) {
             Pane p = new Pane();
             p.setPrefWidth(buttonHeight);
             p.setPrefHeight(50);
             p.setStyle("-fx-background-color: #ffffff;");
-            if (i == 4) {
+            if (i == 5) {
                 bottom.getChildren().add(p);
             } else {
                 lr2.getChildren().add(p);
             }
+            indexedPanes.put(i, p);
         }
         row.getChildren().addAll(lr1, lr2);
         column.getChildren().addAll(row, bottom);
@@ -99,19 +109,39 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         createInterpreter();
+        Pane row = createButtonDisplay();
+        referencedPanes = new HashMap<>();
         BorderPane root = new BorderPane();
         root.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent e) {
+                String code = e.getCode().toString();
                 if (index != 10) {
-                    controller.addMapping(e.getCode().toString(), index);
+                    referencedPanes.put(code, indexedPanes.get(index));
+                    controller.addMapping(code, index);
                     index++;
                 } else {
-                    controller.input(e.getCode().toString());
+                    controller.input(code);
+                    System.out.println(e.getEventType());
+                    if (referencedPanes.containsKey(code)) { 
+                        if (e.getEventType() ==  KeyEvent.KEY_RELEASED) {
+                            referencedPanes.get(code).setStyle("-fx-background-color: white;");
+                        } else {
+                            referencedPanes.get(code).setStyle("-fx-background-color: green;");
+                        }
+                    }
                 }
             }
         });
-        Pane row = createButtonDisplay();
+        root.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent e) {
+                String code = e.getCode().toString();
+                if (referencedPanes.containsKey(code)) { 
+                referencedPanes.get(code).setStyle("-fx-background-color: white;");
+                }
+            }
+        });
         row.setStyle("-fx-background-color: #336699;");
         row.setPadding(new Insets(15, 12, 15, 12));
         root.setCenter(area);
