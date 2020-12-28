@@ -32,18 +32,54 @@ public class Main extends Application {
     int index;
 
     public Pane createButtonDisplay() {
+        int rowSpacing = 30;
+        int buttonSpacing = 11;
+        int buttonHeight = 200;
+        VBox column = new VBox();
         HBox row = new HBox();
-        row.setSpacing(11);
-        row.setPrefHeight(200);
-        for (int i = 0; i < 11; i++) {
+        row.setAlignment(Pos.CENTER);
+        row.setSpacing(rowSpacing);
+        column.setSpacing(buttonSpacing);
+
+        HBox lr1 = new HBox();
+        HBox lr2 = new HBox();
+        HBox bottom = new HBox();
+        bottom.setSpacing(rowSpacing);
+        bottom.setAlignment(Pos.CENTER);
+        bottom.setPrefHeight(buttonHeight);
+
+        lr1.setSpacing(buttonSpacing);
+        lr1.setPrefHeight(buttonHeight);
+
+        lr2.setSpacing(buttonSpacing);
+        lr2.setPrefHeight(buttonHeight);
+
+        for (int i = 0; i < 5; i++) {
             Pane p = new Pane();
-            p.setPrefWidth(200);
-            p.setPrefHeight(100);
+            p.setPrefWidth(buttonHeight);
+            p.setPrefHeight(50);
             p.setStyle("-fx-background-color: #ffffff;");
-            row.getChildren().add(p);
-            System.out.println("add");
+            if (i == 4) {
+                bottom.getChildren().add(p);
+            } else {
+                lr1.getChildren().add(p);
+            }
         }
-        return row;
+
+        for (int i = 0; i < 5; i++) {
+            Pane p = new Pane();
+            p.setPrefWidth(buttonHeight);
+            p.setPrefHeight(50);
+            p.setStyle("-fx-background-color: #ffffff;");
+            if (i == 4) {
+                bottom.getChildren().add(p);
+            } else {
+                lr2.getChildren().add(p);
+            }
+        }
+        row.getChildren().addAll(lr1, lr2);
+        column.getChildren().addAll(row, bottom);
+        return column;
     }
 
     public void createInterpreter() {
