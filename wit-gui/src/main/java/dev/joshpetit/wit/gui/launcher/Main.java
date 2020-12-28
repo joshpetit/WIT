@@ -62,31 +62,21 @@ public class Main extends Application {
         lr2.setSpacing(buttonSpacing);
         lr2.setPrefHeight(buttonHeight);
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             Pane p = new Pane();
             p.setPrefWidth(buttonHeight);
             p.setPrefHeight(50);
             p.setStyle("-fx-background-color: #ffffff;");
-            if (i == 4) {
+            if (i == 4 || i == 5) {
                 bottom.getChildren().add(p);
-            } else {
+            } else if ( i < 5) {
                 lr1.getChildren().add(p);
-            }
-            indexedPanes.put(i, p);
-        }
-
-        for (int i = 5; i < 10; i++) {
-            Pane p = new Pane();
-            p.setPrefWidth(buttonHeight);
-            p.setPrefHeight(50);
-            p.setStyle("-fx-background-color: #ffffff;");
-            if (i == 5) {
-                bottom.getChildren().add(p);
             } else {
                 lr2.getChildren().add(p);
             }
             indexedPanes.put(i, p);
         }
+
         row.getChildren().addAll(lr1, lr2);
         column.getChildren().addAll(row, bottom);
         return column;
@@ -122,14 +112,9 @@ public class Main extends Application {
                     index++;
                 } else {
                     controller.input(code);
-                    System.out.println(e.getEventType());
-                    if (referencedPanes.containsKey(code)) { 
-                        if (e.getEventType() ==  KeyEvent.KEY_RELEASED) {
-                            referencedPanes.get(code).setStyle("-fx-background-color: white;");
-                        } else {
-                            referencedPanes.get(code).setStyle("-fx-background-color: green;");
-                        }
-                    }
+                }
+                if (referencedPanes.containsKey(code)) {
+                    referencedPanes.get(code).setStyle("-fx-background-color: green;");
                 }
             }
         });
@@ -137,8 +122,8 @@ public class Main extends Application {
             @Override
             public void handle(KeyEvent e) {
                 String code = e.getCode().toString();
-                if (referencedPanes.containsKey(code)) { 
-                referencedPanes.get(code).setStyle("-fx-background-color: white;");
+                if (referencedPanes.containsKey(code)) {
+                    referencedPanes.get(code).setStyle("-fx-background-color: white;");
                 }
             }
         });
