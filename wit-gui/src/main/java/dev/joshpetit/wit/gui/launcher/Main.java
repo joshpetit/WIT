@@ -25,6 +25,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 import javafx.stage.Stage;
 
@@ -34,8 +36,8 @@ public class Main extends Application {
     StringInterpreter controller;
     Properties config;
     int index;
-    Map<Integer, Pane> indexedPanes;
-    Map<String, Pane> referencedPanes;
+    Map<Integer, ButtonPane> indexedPanes;
+    Map<String, ButtonPane> referencedPanes;
 
     //TODO: Set minimal height for panes
     public Pane createButtonDisplay() {
@@ -63,7 +65,7 @@ public class Main extends Application {
         lr2.setPrefHeight(buttonHeight);
 
         for (int i = 0; i < 10; i++) {
-            Pane p = new Pane();
+            ButtonPane p = new ButtonPane("" + (i + 1));
             p.setPrefWidth(buttonHeight);
             p.setPrefHeight(50);
             p.setStyle("-fx-background-color: #ffffff;");
