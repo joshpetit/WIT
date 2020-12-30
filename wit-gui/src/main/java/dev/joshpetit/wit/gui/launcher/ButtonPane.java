@@ -1,8 +1,8 @@
 package dev.joshpetit.wit.gui.launcher;
-
 import javafx.geometry.Pos;
 
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
@@ -21,6 +21,7 @@ public class ButtonPane extends BorderPane {
 
 	public ButtonPane(String numText, String keyText, String potentialText) {
 		super();
+		int fontSize = 20;
 		this.numText = new Text(numText);
 		this.keyText = new Text(keyText);
 		this.potentialText = new Text(potentialText);
@@ -28,11 +29,13 @@ public class ButtonPane extends BorderPane {
 		setTop(this.numText);
 		setAlignment(this.numText, Pos.CENTER);
 
-		setCenter(this.keyText);
-		setAlignment(this.keyText, Pos.CENTER);
-
-		setBottom(this.potentialText);
+		setCenter(this.potentialText);
 		setAlignment(this.potentialText, Pos.CENTER);
+
+		setBottom(this.keyText);
+		setAlignment(this.keyText, Pos.CENTER);
+		this.keyText.setFont(new Font(fontSize));
+
 	}
 
 	public void setNum(String text) {

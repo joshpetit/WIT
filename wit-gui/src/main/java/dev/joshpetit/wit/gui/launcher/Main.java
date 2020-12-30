@@ -88,6 +88,7 @@ public class Main extends Application {
         try {
             config = BasicTypingSystem.getDefaultProperties();
             area = new CommandableTextArea("Demo Text");
+            area.getStyleClass().add("output");
             //area.setDisable(true);
             area.setOpacity(1);
             ts = new BasicTypingSystem(config, area);
@@ -102,6 +103,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         createInterpreter();
         Pane row = createButtonDisplay();
+        row.getStyleClass().add("button-pane");
         referencedPanes = new HashMap<>();
         BorderPane root = new BorderPane();
         root.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -110,6 +112,7 @@ public class Main extends Application {
                 String code = e.getCode().toString();
                 if (index != 10) {
                     referencedPanes.put(code, indexedPanes.get(index));
+                    indexedPanes.get(index).setKey(code);
                     controller.addMapping(code, index);
                     index++;
                 } else {
@@ -129,11 +132,12 @@ public class Main extends Application {
                 }
             }
         });
-        row.setStyle("-fx-background-color: #336699;");
         row.setPadding(new Insets(15, 12, 15, 12));
         root.setCenter(area);
         root.setBottom(row);
         Scene scene = new Scene(root, 700, 500);
+        String css = Main.class.getResource("main.css").toExternalForm();
+        scene.getStylesheets().add(css);
 
         primaryStage.setTitle("WIT - Blind Keyboard");
         primaryStage.setScene(scene);
