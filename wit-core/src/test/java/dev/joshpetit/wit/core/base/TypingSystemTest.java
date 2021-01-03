@@ -1,6 +1,7 @@
 package dev.joshpetit.wit.core.base;
 
 import static org.junit.jupiter.api.Assertions.*;
+import java.io.IOException;
 
 import java.util.Properties;
 import java.util.HashMap;
@@ -44,6 +45,25 @@ class TypingSystemTest {
 			bts.input(0);
 			bts.input(2);
 			assertTrue(called[2], "typingAppend command should have been called");
+		}
+
+		@Test
+		void testStandardCompletions() {
+			boolean[] called = new boolean[3];
+			BasicCommandable context = new BasicCommandable() {
+				public void typingMessage(MessageCommand c) {}
+				public void typingDelete(DeleteCommand c) {}
+				public void typingAppend(AppendCommand c) {}
+			};
+			try {
+				Properties props = BasicTypingSystem.getDefaultProperties();
+				BasicTypingSystem bts = new BasicTypingSystem(props, context); 
+				System.out.println(bts.getStandardCompletions());
+				bts.input(2);
+				System.out.println(bts.getStandardCompletions());
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

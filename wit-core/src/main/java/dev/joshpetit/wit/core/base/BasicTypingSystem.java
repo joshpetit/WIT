@@ -1,6 +1,8 @@
 package dev.joshpetit.wit.core.base;
 import java.io.IOException;
 
+import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
@@ -8,7 +10,7 @@ import dev.joshpetit.wit.core.commands.*;
 
 public class BasicTypingSystem extends TypingSystem<BasicCommandable> {
 	protected StringBuilder inputs;
-	
+
 	public BasicTypingSystem(Properties config, BasicCommandable context) {
 		super(config, context);
 		inputs = new StringBuilder();
@@ -34,23 +36,51 @@ public class BasicTypingSystem extends TypingSystem<BasicCommandable> {
 		}
 	}
 
+	/*
+	 * Returns possible key combinations based on what
+	 * is passed. Focuses on alphabetical values.
+	 * May have to modify this to make more abstract.
+	 */
+	public Map<Integer, String> getStandardCompletions() {
+		Map<Integer, String> map = new HashMap<>();
+		if (inputs.length() == 0) {
+			for (int i = 0; i < 5; i++) {
+				String command1 = config.getProperty("" + i + 5);
+				String command2 = config.getProperty("" + i + 9);
+				AppendCommand beg = (AppendCommand) BasicTypingSystem.parseCommand(command1);
+				AppendCommand end = (AppendCommand) BasicTypingSystem.parseCommand(command2);
+				map.put(i, beg.getUpper() + "-" + end.getUpper());
+			}
+		} else {
+			for (int i = 5; i < 10; i++) {
+				String n = inputs.toString();
+				String command = config.getProperty(n + i);
+				AppendCommand com = (AppendCommand) BasicTypingSystem.parseCommand(command);
+				map.put(i, com.getLower());
+			}
+		}
+
+		return map;
+	}
+
 	public static Command parseCommand(String command) {
 		int ctype;
-		switch(command.charAt(0)) {
-			case '0':
-				ctype = command.charAt(1) - 48; // 0 = 48
-				MessageCommand.TYPE mtype = MessageCommand.TYPE.values()[ctype];
-				return new MessageCommand(mtype);
-			case '1':
-				ctype = command.charAt(1) - 48;
-				DeleteCommand.TYPE dtype = DeleteCommand.TYPE.values()[ctype];
-				return new DeleteCommand(dtype);
-			case '2':
-				return new AppendCommand("" + command.charAt(1), "" + command.charAt(2));
+		switch (command.charAt(0)) {
+		case '0':
+			ctype = command.charAt(1) - 48; // 0 = 48
+			MessageCommand.TYPE mtype = MessageCommand.TYPE.values()[ctype];
+			return new MessageCommand(mtype);
+		case '1':
+			ctype = command.charAt(1) - 48;
+			DeleteCommand.TYPE dtype = DeleteCommand.TYPE.values()[ctype];
+			return new DeleteCommand(dtype);
+		case '2':
+			return new AppendCommand("" + command.charAt(1), "" + command.charAt(2));
 		}
 		return null;
 	}
 
+	// Handle IOException within method.
 	public static Properties getDefaultProperties() throws IOException {
 		Properties config = new Properties();
 		config.load(InputInterpreter.class.getResourceAsStream("defaultConfig.properties"));
