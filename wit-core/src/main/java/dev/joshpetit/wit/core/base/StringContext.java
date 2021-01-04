@@ -37,11 +37,14 @@ public class StringContext implements BasicCommandable {
 	}
 
 	public void typingMessage(MessageCommand c) {
-		switch(c.getType()) {
-			case CAPS_LOCK:
-				capsLockOn = !capsLockOn;
-			case SHIFT:
-				nextUpper = !nextUpper;
+		switch (c.getType()) {
+		case CAPS_LOCK:
+			capsLockOn = !capsLockOn;
+			nextUpper = capsLockOn;
+			break;
+		case SHIFT:
+			nextUpper = !nextUpper;
+			break;
 		}
 	}
 

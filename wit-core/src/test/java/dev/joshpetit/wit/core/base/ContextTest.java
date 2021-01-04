@@ -59,6 +59,7 @@ class ContextsTest {
 			StringContext s = new StringContext();
 			s.typingMessage(capsLock);
 			assertTrue(s.capsLockOn());
+			assertTrue(s.nextUpper());
 
 			s.typingAppend(appendWord);
 			assertEquals(s.getText(), "Abc");
@@ -71,6 +72,7 @@ class ContextsTest {
 
 			s.typingMessage(capsLock);
 			assertFalse(s.capsLockOn());
+			assertFalse(s.nextUpper());
 
 			s.typingAppend(appendLetter);
 			assertEquals(s.getText(), "AbcA a");
