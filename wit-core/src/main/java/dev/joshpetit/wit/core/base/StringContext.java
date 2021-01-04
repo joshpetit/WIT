@@ -7,6 +7,7 @@ import dev.joshpetit.wit.core.commands.*;
 public class StringContext implements BasicCommandable {
 	protected StringBuilder text;
 	boolean capsLockOn;
+	boolean nextUpper;
 
 	public StringContext() {
 		this("");
@@ -17,7 +18,10 @@ public class StringContext implements BasicCommandable {
 	}
 
 	public void typingAppend(AppendCommand c) {
-		text.append( capsLockOn ? c.getUpper() : c.getLower());
+		text.append( nextUpper || capsLockOn ? c.getUpper() : c.getLower());
+		if (nextUpper && !capsLockOn) {
+			nextUpper = false;
+		}
 	}
 
 	public void typingDelete(DeleteCommand c) {
@@ -36,11 +40,17 @@ public class StringContext implements BasicCommandable {
 		switch(c.getType()) {
 			case CAPS_LOCK:
 				capsLockOn = !capsLockOn;
+			case SHIFT:
+				nextUpper = !nextUpper;
 		}
 	}
 
 	public boolean capsLockOn() {
 		return this.capsLockOn;
+	}
+
+	public boolean nextUpper() {
+		return this.nextUpper;
 	}
 
 	public String getText() {

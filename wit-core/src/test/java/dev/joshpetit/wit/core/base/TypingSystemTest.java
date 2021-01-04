@@ -28,6 +28,7 @@ class TypingSystemTest {
 				public void typingMessage(MessageCommand c) {called[0] = true;}
 				public void typingDelete(DeleteCommand c) {called[1] = true;}
 				public void typingAppend(AppendCommand c) {called[2] = true;}
+				public boolean nextUpper(){return true;}
 				Map<String, Integer> s = new HashMap<>();
 			};
 			Properties props = new Properties();
@@ -54,6 +55,7 @@ class TypingSystemTest {
 				public void typingMessage(MessageCommand c) {}
 				public void typingDelete(DeleteCommand c) {}
 				public void typingAppend(AppendCommand c) {}
+				public boolean nextUpper(){return true;}
 			};
 			try {
 				Properties props = BasicTypingSystem.getDefaultProperties();

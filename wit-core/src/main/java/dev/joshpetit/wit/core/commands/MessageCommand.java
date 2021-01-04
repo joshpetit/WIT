@@ -3,7 +3,7 @@ package dev.joshpetit.wit.core.commands;
 public class MessageCommand extends Command {
 	private MessageCommand.TYPE type;
 	public enum TYPE {
-		CAPS_LOCK
+		CAPS_LOCK, SHIFT
 	}
 
 	public MessageCommand(MessageCommand.TYPE t) {

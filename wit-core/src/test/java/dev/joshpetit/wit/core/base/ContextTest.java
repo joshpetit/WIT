@@ -17,11 +17,12 @@ class ContextsTest {
 	class StringContextCases {
 		AppendCommand appendLetter = new AppendCommand("a", "A");
 		// Possibly configure hot words to be appending with preceeding space
-		AppendCommand appendWord = new AppendCommand("abc", "Abc"); 
+		AppendCommand appendWord = new AppendCommand("abc", "Abc");
 		AppendCommand appendSpace = new AppendCommand(" ", " ");
 		DeleteCommand deleteChar = new DeleteCommand(DeleteCommand.TYPE.CHAR);
 		DeleteCommand deleteWord = new DeleteCommand(DeleteCommand.TYPE.WORD);
 		MessageCommand capsLock = new MessageCommand(MessageCommand.TYPE.CAPS_LOCK);
+		MessageCommand shift = new MessageCommand(MessageCommand.TYPE.SHIFT);
 
 		@Test
 		void testTypingAppend() {
@@ -46,7 +47,7 @@ class ContextsTest {
 
 			s.typingDelete(deleteChar);
 			assertEquals(s.getText(), "aa");
-			
+
 			s.typingAppend(appendSpace);
 			s.typingAppend(appendWord);
 			s.typingDelete(deleteWord);
@@ -73,6 +74,16 @@ class ContextsTest {
 
 			s.typingAppend(appendLetter);
 			assertEquals(s.getText(), "AbcA a");
+
+			s.typingMessage(shift);
+			assertTrue(s.nextUpper());
+
+			s.typingAppend(appendLetter);
+			assertFalse(s.nextUpper());
+			assertEquals(s.getText(), "AbcA aA");
+
+			s.typingAppend(appendLetter);
+			assertEquals(s.getText(), "AbcA aAa");
 		}
 	}
 }
