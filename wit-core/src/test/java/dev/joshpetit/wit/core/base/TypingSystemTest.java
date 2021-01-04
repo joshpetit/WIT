@@ -51,16 +51,17 @@ class TypingSystemTest {
 		@Test
 		void testStandardCompletions() {
 			boolean[] called = new boolean[3];
+			final boolean upper = false;
 			BasicCommandable context = new BasicCommandable() {
 				public void typingMessage(MessageCommand c) {}
 				public void typingDelete(DeleteCommand c) {}
 				public void typingAppend(AppendCommand c) {}
-				public boolean nextUpper(){return true;}
+				public boolean nextUpper(){return upper;}
 			};
 				Properties props = BasicTypingSystem.getDefaultProperties();
 				BasicTypingSystem bts = new BasicTypingSystem(props, context); 
 				System.out.println(bts.getStandardCompletions());
-				bts.input(2);
+				bts.input(9);
 				System.out.println(bts.getStandardCompletions());
 		}
 	}

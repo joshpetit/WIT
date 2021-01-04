@@ -44,19 +44,31 @@ public class BasicTypingSystem extends TypingSystem<BasicCommandable> {
 	public Map<Integer, String> getStandardCompletions() {
 		Map<Integer, String> map = new HashMap<>();
 		if (inputs.length() == 0) {
-			for (int i = 0; i < 5; i++) {
-				String command1 = config.getProperty("" + i + 5);
-				String command2 = config.getProperty("" + i + 9);
-				AppendCommand beg = (AppendCommand) BasicTypingSystem.parseCommand(command1);
-				AppendCommand end = (AppendCommand) BasicTypingSystem.parseCommand(command2);
-				map.put(i, beg.getUpper() + "-" + end.getUpper());
+			for (int i = 0; i < 10; i++) {
+				if ( i < 5 ) {
+					String command1 = config.getProperty("" + i + 5);
+					String command2 = config.getProperty("" + i + 9);
+					AppendCommand beg = (AppendCommand) BasicTypingSystem.parseCommand(command1);
+					AppendCommand end = (AppendCommand) BasicTypingSystem.parseCommand(command2);
+					command1 = context.nextUpper() ? beg.getUpper() : beg.getLower();
+					command2 = context.nextUpper() ? end.getUpper() : end.getLower();
+					map.put(i, command1 + "-" + command2);
+				} else {
+					map.put(i, "");
+				}
 			}
 		} else {
-			for (int i = 5; i < 10; i++) {
+			for (int i = 0; i < 10; i++) {
 				String n = inputs.toString();
 				String command = config.getProperty(n + i);
-				AppendCommand com = (AppendCommand) BasicTypingSystem.parseCommand(command);
-				map.put(i, com.getLower());
+				Command comu = command != null ? BasicTypingSystem.parseCommand(command) : null;
+				if (comu instanceof AppendCommand) {
+					AppendCommand com = (AppendCommand) BasicTypingSystem.parseCommand(command);
+					command = context.nextUpper() ? com.getUpper() : com.getLower();
+					map.put(i, command);
+				} else {
+					map.put(i, "");
+				}
 			}
 		}
 
@@ -67,7 +79,7 @@ public class BasicTypingSystem extends TypingSystem<BasicCommandable> {
 		int ctype;
 		switch (command.charAt(0)) {
 		case '0':
-			ctype = command.charAt(1) - 48; // 0 = 48
+			ctype = command.charAt(1) - 48; // (int) '0' = 48
 			MessageCommand.TYPE mtype = MessageCommand.TYPE.values()[ctype];
 			return new MessageCommand(mtype);
 		case '1':
