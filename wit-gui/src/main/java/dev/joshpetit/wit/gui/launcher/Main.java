@@ -85,17 +85,14 @@ public class Main extends Application {
     }
 
     public void createInterpreter() {
-        try {
-            config = BasicTypingSystem.getDefaultProperties();
-            area = new CommandableTextArea("Demo Text");
-            area.getStyleClass().add("output");
-            //area.setDisable(true);
-            area.setOpacity(1);
-            ts = new BasicTypingSystem(config, area);
-            controller = new StringInterpreter(ts);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        config = BasicTypingSystem.getDefaultProperties();
+        area = new CommandableTextArea("Demo Text");
+        area.getStyleClass().add("output");
+        //area.setDisable(true);
+        area.setOpacity(1);
+        ts = new BasicTypingSystem(config, area);
+        controller = new StringInterpreter(ts);
+
     }
 
 
