@@ -57,15 +57,11 @@ class TypingSystemTest {
 				public void typingAppend(AppendCommand c) {}
 				public boolean nextUpper(){return true;}
 			};
-			try {
 				Properties props = BasicTypingSystem.getDefaultProperties();
 				BasicTypingSystem bts = new BasicTypingSystem(props, context); 
 				System.out.println(bts.getStandardCompletions());
 				bts.input(2);
 				System.out.println(bts.getStandardCompletions());
-			} catch(IOException e) {
-				e.printStackTrace();
-			}
 		}
 	}
 }

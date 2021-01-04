@@ -80,10 +80,14 @@ public class BasicTypingSystem extends TypingSystem<BasicCommandable> {
 		return null;
 	}
 
-	// Handle IOException within method.
-	public static Properties getDefaultProperties() throws IOException {
-		Properties config = new Properties();
-		config.load(InputInterpreter.class.getResourceAsStream("defaultConfig.properties"));
-		return config;
+	public static Properties getDefaultProperties() {
+		try {
+			Properties config = new Properties();
+			config.load(InputInterpreter.class.getResourceAsStream("defaultConfig.properties"));
+			return config;
+		} catch ( IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
