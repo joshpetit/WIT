@@ -32,7 +32,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     CommandableTextArea area;
-    TypingSystem ts;
+    BasicTypingSystem ts;
     StringInterpreter controller;
     Properties config;
     int index;
@@ -69,9 +69,7 @@ public class Main extends Application {
             p.setPrefWidth(buttonHeight);
             p.setPrefHeight(50);
             p.setStyle("-fx-background-color: #ffffff;");
-            if (i == 4 || i == 5) {
-                bottom.getChildren().add(p);
-            } else if ( i < 5) {
+            if ( i < 5) {
                 lr1.getChildren().add(p);
             } else {
                 lr2.getChildren().add(p);
@@ -126,6 +124,10 @@ public class Main extends Application {
                 String code = e.getCode().toString();
                 if (referencedPanes.containsKey(code)) {
                     referencedPanes.get(code).setStyle("-fx-background-color: white;");
+                    Map<Integer, String> map = ts.getStandardCompletions();
+                    for (int i = 0; i < 10; i++) {
+                        indexedPanes.get(i).setPotential(map.get(i));
+                    }
                 }
             }
         });

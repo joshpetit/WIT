@@ -35,7 +35,9 @@ public class ButtonPane extends BorderPane {
 		setBottom(this.keyText);
 		setAlignment(this.keyText, Pos.CENTER);
 		this.keyText.setFont(new Font(fontSize));
-
+		this.potentialText.getStyleClass().add("special-text");
+		// For some reason styling doesn't work?
+		this.potentialText.setStyle("-fx-text-background-color: green;");
 	}
 
 	public void setNum(String text) {
