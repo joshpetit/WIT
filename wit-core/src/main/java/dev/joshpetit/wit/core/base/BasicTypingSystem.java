@@ -45,10 +45,17 @@ public class BasicTypingSystem extends TypingSystem<BasicCommandable> {
 		Map<Integer, String> map = new HashMap<>();
 		if (inputs.length() == 0) {
 			for (int i = 0; i < 10; i++) {
-				if ( i < 5 ) {
-					String command1 = config.getProperty("" + i + 5);
-					String command2 = config.getProperty("" + i + 9);
-					AppendCommand beg = (AppendCommand) BasicTypingSystem.parseCommand(command1);
+				if (i == 9) {
+					map.put(i, "SPACES");
+					continue;
+				}
+				String command1 = config.getProperty("" + i + 5);
+				String command2 = config.getProperty("" + i + 9);
+
+				Command begC = command1 == null ? null : BasicTypingSystem.parseCommand(command1);
+				Command begE = command2 == null ? null : BasicTypingSystem.parseCommand(command2);
+				if (begC instanceof AppendCommand && begE instanceof AppendCommand) {
+					AppendCommand beg = (AppendCommand) begC;
 					AppendCommand end = (AppendCommand) BasicTypingSystem.parseCommand(command2);
 					command1 = context.nextUpper() ? beg.getUpper() : beg.getLower();
 					command2 = context.nextUpper() ? end.getUpper() : end.getLower();
@@ -65,6 +72,23 @@ public class BasicTypingSystem extends TypingSystem<BasicCommandable> {
 				if (comu instanceof AppendCommand) {
 					AppendCommand com = (AppendCommand) BasicTypingSystem.parseCommand(command);
 					command = context.nextUpper() ? com.getUpper() : com.getLower();
+					if (!Character.isAlphabetic(command.charAt(0))) {
+						switch (command) {
+						case " ":
+							command = "SPACE";
+							break;
+						case "\t":
+							command = "TAB";
+							break;
+						case "\n":
+							command = "N.L";
+							break;
+						case "\r":
+							command = "ENTER";
+							break;
+
+						}
+					}
 					map.put(i, command);
 				} else {
 					map.put(i, "");
