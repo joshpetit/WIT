@@ -90,7 +90,7 @@ class TypingSystemTest {
 			            2, "",
 			            3, "",
 			            4, "z",
-			            5, "",
+			            5, "ENTER",
 			            6, "N.L",
 			            7, "TAB",
 			            8, "SPACE",
