@@ -26,7 +26,10 @@ public class CommandableTextArea extends TextArea implements BasicCommandable {
 
 
 	public void typingAppend(AppendCommand c) {
-		appendText( capsLockOn ? c.getUpper() : c.getLower());
+		appendText( nextUpper ? c.getUpper() : c.getLower());
+		if (nextUpper && !capsLockOn) {
+			nextUpper = false;
+		}
 	}
 
 	public void typingDelete(DeleteCommand c) {
