@@ -77,8 +77,8 @@ class TypingSystemTest {
 			                3, "p-t",
 			                4, "u-y",
 			                5, "",
-			                6, "",
-			                7, "",
+			                6, "SHIFTS",
+			                7, "DELETE",
 			                8, "",
 			                9, "SPACES"
 			            );
@@ -107,10 +107,10 @@ class TypingSystemTest {
 			            3, "P-T",
 			            4, "U-Y",
 			            5, "",
-			            6, "",
-			            7, "",
-			            8, "",
-			            9, "SPACES"
+						6, "SHIFTS",
+						7, "DELETE",
+						8, "",
+						9, "SPACES"
 			        );
 			assertEquals(comps, bts.getStandardCompletions());
 

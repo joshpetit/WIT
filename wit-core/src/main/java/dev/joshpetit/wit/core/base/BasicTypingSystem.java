@@ -43,56 +43,63 @@ public class BasicTypingSystem extends TypingSystem<BasicCommandable> {
 	 */
 	public Map<Integer, String> getStandardCompletions() {
 		Map<Integer, String> map = new HashMap<>();
+		String value;
 		if (inputs.length() == 0) {
 			for (int i = 0; i < 10; i++) {
-				if (i == 9) {
-					map.put(i, "SPACES");
-					continue;
-				}
+				value = "";
 				String command1 = config.getProperty("" + i + 5);
 				String command2 = config.getProperty("" + i + 9);
-
 				Command begC = command1 == null ? null : BasicTypingSystem.parseCommand(command1);
 				Command begE = command2 == null ? null : BasicTypingSystem.parseCommand(command2);
-				if (begC instanceof AppendCommand && begE instanceof AppendCommand) {
+				if (begE instanceof AppendCommand) {
 					AppendCommand beg = (AppendCommand) begC;
-					AppendCommand end = (AppendCommand) BasicTypingSystem.parseCommand(command2);
-					command1 = context.nextUpper() ? beg.getUpper() : beg.getLower();
-					command2 = context.nextUpper() ? end.getUpper() : end.getLower();
-					map.put(i, command1 + "-" + command2);
-				} else {
-					map.put(i, "");
+					AppendCommand end = (AppendCommand) begE;
+					if (!Character.isAlphabetic(beg.getLower().charAt(0))) {
+						value = "SPACES";
+					} else {
+						command1 = context.nextUpper() ? beg.getUpper() : beg.getLower();
+						command2 = context.nextUpper() ? end.getUpper() : end.getLower();
+						value = command1 + "-" + command2;
+					}
+				} else if (begC instanceof DeleteCommand) {
+					value = "DELETE";
+				} else if (begC instanceof MessageCommand) {
+					value = "SHIFTS";
 				}
+				map.put(i, value);
 			}
 		} else {
 			for (int i = 0; i < 10; i++) {
 				String n = inputs.toString();
 				String command = config.getProperty(n + i);
+				value = "";
 				Command comu = command != null ? BasicTypingSystem.parseCommand(command) : null;
 				if (comu instanceof AppendCommand) {
 					AppendCommand com = (AppendCommand) BasicTypingSystem.parseCommand(command);
-					command = context.nextUpper() ? com.getUpper() : com.getLower();
-					if (!Character.isAlphabetic(command.charAt(0))) {
-						switch (command) {
+					value = context.nextUpper() ? com.getUpper() : com.getLower();
+					if (!Character.isAlphabetic(value.charAt(0))) {
+						switch (value) {
 						case " ":
-							command = "SPACE";
+							value = "SPACE";
 							break;
 						case "\t":
-							command = "TAB";
+							value = "TAB";
 							break;
 						case "\n":
-							command = "N.L";
+							value = "N.L";
 							break;
 						case "\r":
-							command = "ENTER";
+							value = "ENTER";
 							break;
-
 						}
 					}
-					map.put(i, command);
-				} else {
-					map.put(i, "");
+				} else if (comu instanceof DeleteCommand) {
+					DeleteCommand.TYPE c = ( (DeleteCommand) comu).getType();
+					value = c.toString();
+				} else if (comu instanceof MessageCommand) {
+					value = ( (MessageCommand) comu).getType().toString();
 				}
+				map.put(i, value);
 			}
 		}
 
