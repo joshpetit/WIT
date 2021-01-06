@@ -80,7 +80,7 @@ class TypingSystemTest {
 			                6, "",
 			                7, "",
 			                8, "",
-			                9, ""
+			                9, "SPACES"
 			            );
 			assertEquals(comps, bts.getStandardCompletions());
 			bts.input(9);
@@ -91,9 +91,9 @@ class TypingSystemTest {
 			            3, "",
 			            4, "z",
 			            5, "",
-			            6, "",
-			            7, "",
-			            8, "",
+			            6, "N.L",
+			            7, "TAB",
+			            8, "SPACE",
 			            9, "0"
 			        );
 			assertEquals(comps, bts.getStandardCompletions());
@@ -110,7 +110,7 @@ class TypingSystemTest {
 			            6, "",
 			            7, "",
 			            8, "",
-			            9, ""
+			            9, "SPACES"
 			        );
 			assertEquals(comps, bts.getStandardCompletions());
 
