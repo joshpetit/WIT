@@ -115,6 +115,11 @@ public class Main extends Application {
                 }
                 if (referencedPanes.containsKey(code)) {
                     referencedPanes.get(code).setStyle("-fx-background-color: green;");
+					// Possibly use keyReleased for second presses
+                    Map<Integer, String> map = ts.getStandardCompletions();
+                    for (int i = 0; i < 10; i++) {
+                        indexedPanes.get(i).setPotential(map.get(i));
+                    }
                 }
             }
         });
@@ -124,10 +129,6 @@ public class Main extends Application {
                 String code = e.getCode().toString();
                 if (referencedPanes.containsKey(code)) {
                     referencedPanes.get(code).setStyle("-fx-background-color: white;");
-                    Map<Integer, String> map = ts.getStandardCompletions();
-                    for (int i = 0; i < 10; i++) {
-                        indexedPanes.get(i).setPotential(map.get(i));
-                    }
                 }
             }
         });
