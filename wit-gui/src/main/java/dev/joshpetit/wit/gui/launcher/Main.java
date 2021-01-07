@@ -18,6 +18,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
@@ -77,8 +78,28 @@ public class Main extends Application {
             indexedPanes.put(i, p);
         }
 
+		Map<Integer, String> map = ts.getStandardCompletions();
+		for (int i = 0; i < 10; i++) {
+			indexedPanes.get(i).setPotential(map.get(i));
+		}
+
         row.getChildren().addAll(lr1, lr2);
         column.getChildren().addAll(row, bottom);
+		Button button = new Button("Reset");
+		button.setOnAction( (x) -> {
+			if (referencedPanes != null) {
+				referencedPanes.clear();
+			}
+			for (int i = 0; i < 10; i++) {
+				indexedPanes.get(i).setKey("");
+			}
+			controller.resetMappings();
+			index = 0;
+			
+			System.out.println(referencedPanes);
+			System.out.println(indexedPanes);
+		});
+		bottom.getChildren().add(button);
         return column;
     }
 

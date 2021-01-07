@@ -34,6 +34,10 @@ public class StringInterpreter extends InputInterpreter {
 		map.put(input, value);
 	}
 
+	public void resetMappings() {
+		map.clear();
+	}
+
 	public Map<String, Integer> getMappings() {
 		return this.map;
 	}
