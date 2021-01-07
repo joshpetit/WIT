@@ -106,10 +106,12 @@ public class Main extends Application {
             public void handle(KeyEvent e) {
                 String code = e.getCode().toString();
                 if (index != 10) {
-                    referencedPanes.put(code, indexedPanes.get(index));
-                    indexedPanes.get(index).setKey(code);
-                    controller.addMapping(code, index);
-                    index++;
+					if (!referencedPanes.containsKey(code)) {
+						referencedPanes.put(code, indexedPanes.get(index));
+						indexedPanes.get(index).setKey(code);
+						controller.addMapping(code, index);
+						index++;
+					}
                 } else {
                     controller.input(code);
                 }
