@@ -54,6 +54,10 @@ class TypingSystemTest {
 			bts.input(0);
 			bts.input(2);
 			assertTrue(called[2], "typingAppend command should have been called");
+
+			bts.input(0);
+			assertTrue(bts.clear());
+			assertFalse(bts.clear());
 		}
 
 		@Test

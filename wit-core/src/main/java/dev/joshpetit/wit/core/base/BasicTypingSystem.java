@@ -23,6 +23,18 @@ public class BasicTypingSystem extends TypingSystem<BasicCommandable> {
 		inputs.setLength(0);
 	}
 
+	/*
+	 * Returns true if characters were removed.
+	 */
+	public boolean clear() {
+		if (inputs.length() == 0) {
+			return false;
+		} else {
+			inputs.setLength(0);
+			return true;
+		}
+	}
+
 	public void executeCommand(String key) {
 		String command = config.getProperty(key);
 		if (command == null) return;
