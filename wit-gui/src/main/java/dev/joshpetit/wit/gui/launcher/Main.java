@@ -94,15 +94,24 @@ public class Main extends Application {
 		return column;
 	}
 
+	public void setPotential() {
+		Map<Integer, String> map = ts.getStandardCompletions();
+		for (int i = 0; i < 10; i++) {
+			indexedPanes.get(i).setPotential(map.get(i));
+		}
+	}
+
 	public void resetPanes() {
 		if (referencedPanes != null) {
 			referencedPanes.clear();
 		}
+		ts.clear();
 		for (int i = 0; i < 10; i++) {
 			indexedPanes.get(i).setKey("");
 			indexedPanes.get(i).setStyle("-fx-background-color: #ffffff;");
 		}
 		controller.resetMappings();
+		setPotential();
 		index = 0;
 	}
 
@@ -114,7 +123,6 @@ public class Main extends Application {
 		area.setOpacity(1);
 		ts = new BasicTypingSystem(config, area);
 		controller = new StringInterpreter(ts);
-
 	}
 
 
