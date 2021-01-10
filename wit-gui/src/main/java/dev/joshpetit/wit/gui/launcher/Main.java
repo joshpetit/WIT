@@ -102,10 +102,15 @@ public class Main extends Application {
 	}
 
 	public void resetPanes() {
+		if (ts.clear()) {
+			setPotential();
+			return;
+		}
+
 		if (referencedPanes != null) {
 			referencedPanes.clear();
 		}
-		ts.clear();
+
 		for (int i = 0; i < 10; i++) {
 			indexedPanes.get(i).setKey("");
 			indexedPanes.get(i).setStyle("-fx-background-color: #ffffff;");
