@@ -1,2 +1,2 @@
-## 0.0.0
- - Implementing...
+## 0.1.0
+ - Finished implementing basic WIT system components
