@@ -8,7 +8,19 @@ import java.util.Properties;
 
 import dev.joshpetit.wit.core.commands.*;
 
+/**
+ * A BasicTypingSystem is the most simple way to use
+ * WIT as a keyboard. It interprets numbers passed in
+ * and translates every two inputs into the corresponding
+ * command.
+ */
 public class BasicTypingSystem extends TypingSystem<BasicCommandable> {
+	/**
+	 * The numbers inputted into the system, a maximum of two.
+	 * Once inputs reaches its threshold of 2 it is sent to
+	 * {@link TypingSystem#executeCommand(String)} to be constructed
+	 * into a {@link dev.joshpetit.wit.core.command.Command}.
+	 */
 	protected StringBuilder inputs;
 
 	public BasicTypingSystem(Properties config, BasicCommandable context) {
@@ -47,7 +59,8 @@ public class BasicTypingSystem extends TypingSystem<BasicCommandable> {
 
 	/**
 	 * Returns possible key combinations based on what
-	 * is passed. Focuses on alphabetical values.
+	 * has been currently passed to the system.
+	 * Gives alphabetical values priority in maps.
 	 */
 	public Map<Integer, String> getStandardCompletions() {
 		Map<Integer, String> map = new HashMap<>();
@@ -114,6 +127,12 @@ public class BasicTypingSystem extends TypingSystem<BasicCommandable> {
 		return map;
 	}
 
+	/**
+	 * Returns a {@link dev.joshpetit.wit.core.commands.Command} based on
+	 * the passed in string.
+	 * @param command The command in string format that will be decoded
+	 * to create a {@link dev.joshpetit.wit.core.commands.Command}.
+	 */
 	public static Command parseCommand(String command) {
 		int ctype;
 		switch (command.charAt(0)) {
@@ -131,6 +150,10 @@ public class BasicTypingSystem extends TypingSystem<BasicCommandable> {
 		return null;
 	}
 
+	/**
+	 * Returns the properties {@link BasicTypingSystem#parseCommand(String)}
+	 * uses to to parse commands.
+	 */
 	public static Properties getDefaultProperties() {
 		try {
 			Properties config = new Properties();
