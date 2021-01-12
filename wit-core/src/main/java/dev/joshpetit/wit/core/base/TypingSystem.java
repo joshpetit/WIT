@@ -69,6 +69,12 @@ public abstract class TypingSystem<T extends Commandable> {
 	}
 
 	/**
+	 * Clears the current inputs within the TypingSystem
+	 * and returns true if any values were cleared.
+	 */
+	public abstract boolean clear();
+
+	/**
 	 * Returns the current {@link TypingSystem#context} in which
 	 * this system is inputting into.
 	 */

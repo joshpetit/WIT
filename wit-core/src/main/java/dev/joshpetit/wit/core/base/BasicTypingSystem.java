@@ -23,9 +23,6 @@ public class BasicTypingSystem extends TypingSystem<BasicCommandable> {
 		inputs.setLength(0);
 	}
 
-	/*
-	 * Returns true if characters were removed.
-	 */
 	public boolean clear() {
 		if (inputs.length() == 0) {
 			return false;
@@ -48,10 +45,9 @@ public class BasicTypingSystem extends TypingSystem<BasicCommandable> {
 		}
 	}
 
-	/*
+	/**
 	 * Returns possible key combinations based on what
 	 * is passed. Focuses on alphabetical values.
-	 * May have to modify this to make more abstract.
 	 */
 	public Map<Integer, String> getStandardCompletions() {
 		Map<Integer, String> map = new HashMap<>();

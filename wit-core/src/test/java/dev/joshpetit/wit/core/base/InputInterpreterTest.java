@@ -25,18 +25,21 @@ class InputInterpreterTest {
 		TypingSystem ts;
 		@BeforeEach
 		void setup() {
-			try{
+			try {
 				config = new Properties();
 				ts = new TypingSystem(config, context) {
 					public void input(int key) {
 					}
 					public void executeCommand(String key) {
 					}
+					public boolean clear() {
+						return false;
+					}
 				};
 				config.load(InputInterpreter.class.getResourceAsStream("defaultConfig.properties"));
 				context = new Commandable() {
 				};
-			} catch(IOException e) {
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
@@ -74,7 +77,9 @@ class InputInterpreterTest {
 		void testInput() {
 			StringBuilder expected = new StringBuilder();
 			TypingSystem system = new TypingSystem(config, context) {
-
+				public boolean clear() {
+					return false;
+				}
 				public void input(int key) {
 					expected.append(key);
 				}
@@ -111,18 +116,21 @@ class InputInterpreterTest {
 
 		@BeforeEach
 		void setup() {
-			try{
+			try {
 				config = new Properties();
 				config.load(InputInterpreter.class.getResourceAsStream("defaultConfig.properties"));
 				context = new Commandable() {
 				};
 				ts = new TypingSystem(config, context) {
+					public boolean clear() {
+						return false;
+					}
 					public void input(int key) {
 					}
 					public void executeCommand(String key) {
 					}
 				};
-			} catch(IOException e) {
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
@@ -160,6 +168,9 @@ class InputInterpreterTest {
 		void testInput() {
 			StringBuilder expected = new StringBuilder();
 			TypingSystem system = new TypingSystem(config, context) {
+				public boolean clear() {
+					return false;
+				}
 
 				public void input(int key) {
 					expected.append(key);
