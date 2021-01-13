@@ -11,10 +11,6 @@ public class StringInterpreter extends InputInterpreter {
 		map = new HashMap<>();
 	}
 
-	public void setTypingSystem(TypingSystem ts) {
-		this.typingSystem = typingSystem;
-	}
-
 	public void setMappings(Map<String, Integer> map) {
 		if (map == null) {
 			return;
