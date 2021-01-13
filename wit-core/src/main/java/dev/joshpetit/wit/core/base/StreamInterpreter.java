@@ -115,7 +115,7 @@ public class StreamInterpreter extends InputInterpreter {
 					c = reader.read();
 					s = c == -1 ? null : "" + (char) c;
 				}
-			} while(s != null) ;
+			} while (s != null && read) ;
 		}
 		 catch(IOException e) {
 			e.printStackTrace();
