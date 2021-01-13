@@ -82,7 +82,7 @@ public class StreamInterpreter extends InputInterpreter {
 
 	/**
 	 * Directly add and create the inerpreter mappings.
-	 * If @param map is null nothing will happen.
+	 * @param map If null nothing will change.
 	 */
 	public void setMappings(Map<String, Integer> map) {
 		if (map == null) {
