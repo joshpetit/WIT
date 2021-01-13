@@ -19,7 +19,7 @@ public class BasicTypingSystem extends TypingSystem<BasicCommandable> {
 	 * The numbers inputted into the system, a maximum of two.
 	 * Once inputs reaches its threshold of 2 it is sent to
 	 * {@link TypingSystem#executeCommand(String)} to be constructed
-	 * into a {@link dev.joshpetit.wit.core.command.Command}.
+	 * into a {@link dev.joshpetit.wit.core.commands.Command}.
 	 */
 	protected StringBuilder inputs;
 
