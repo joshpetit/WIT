@@ -1,37 +1,7 @@
-## Welcome to GitHub Pages
+## WIT
+WIT (When I Type) is a keyboarding system designed to simplify keyboard usage for the visually impaired.  It works by moving the emphasis from memorizing key locations on a keyboard to memorizing patterns.
 
-You can use the [editor on GitHub](https://github.com/joshpetit/WIT/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+### How does it work
+WIT works by first allowing the user to select ten different keys on a keyboard to use to type. Then, based on the order each of these keys are pressed, different actions will occur. The most basic usage is typing out characters into a text editor, it will be expanded to things such as better browser usability or music player enhancements.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/joshpetit/WIT/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
